@@ -11,12 +11,13 @@
 #import "UICKeyChainStore.h"
 
 #define TWITTER_BASE_URL [NSURL URLWithString:@"https://api.twitter.com/"]
-#define TWIITER_CONSUMER_KEY @"o6umqnPD7QRXoHIDQzuUYXWdB"
+
+#define TWITTER_CONSUMER_KEY @"o6umqnPD7QRXoHIDQzuUYXWdB"
 #define TWITTER_CONSUMER_SECRET @"c1xm2B32T9uXH7QccNBgQpVeUOjvC6Akkrdz94oJMbHE51pSYx"
 
 // used in keychain
 static NSString * const serviceName =  @"tweeeetttter";
-static NSString * const accessTokenKey = @"AcessTokenKey";
+static NSString * const accessTokenKey = @"AccessTokenKey";
 
 @implementation TTTwitterClient {
     UICKeyChainStore *_store;
@@ -27,7 +28,7 @@ static NSString * const accessTokenKey = @"AcessTokenKey";
     static dispatch_once_t once;
 
     dispatch_once(&once, ^{
-        instance = [[TTTwitterClient alloc] initWithBaseURL:TWITTER_BASE_URL key:TWIITER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
+        instance = [[TTTwitterClient alloc] initWithBaseURL:TWITTER_BASE_URL key:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
     });
     return instance;
 }
@@ -51,10 +52,7 @@ static NSString * const accessTokenKey = @"AcessTokenKey";
 
 - (void)authorizeWithCallbackUrl:(NSURL *)callbackUrl success:(void (^) (AFOAuth1Token *accessToken, id responseObject))success failure:(void (^) (NSError *error))failure {
     self.accessToken = nil;
-    [super authorizeUsingOAuthWithRequestTokenPath:@"oauth/request_token" userAuthorizationPath:@"oauth/authorize" callbackURL:callbackUrl accessTokenPath:@"oauth/access_token" accessMethod:@"POST" scope:nil success:^(AFOAuth1Token *accessToken, id responseObject) {
-        [self setAccessToken:accessToken];
-        success(accessToken, responseObject);
-    } failure:failure];
+    [super authorizeUsingOAuthWithRequestTokenPath:@"oauth/request_token" userAuthorizationPath:@"oauth/authorize" callbackURL:callbackUrl accessTokenPath:@"oauth/access_token" accessMethod:@"POST" scope:nil success:success failure:failure];
 }
 
 - (void)currentUserWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
@@ -67,9 +65,7 @@ static NSString * const accessTokenKey = @"AcessTokenKey";
     [super setAccessToken:accessToken];
     if (accessToken) {
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:accessToken];
-        [_store setValue:data forKey:accessTokenKey];
-    } else {
-        [_store removeItemForKey:accessTokenKey];
+        [_store setData:data forKey:accessTokenKey];
     }
     [_store synchronize];
 }

@@ -9,7 +9,7 @@
 #import "TTSignInViewController.h"
 #import "TTTwitterClient.h"
 
-#define CALLBACK_URL @"tweeeetttter://authorized"
+#define CALLBACK_URL @"tweeeetttter:/authorized"
 
 @interface TTSignInViewController ()
 

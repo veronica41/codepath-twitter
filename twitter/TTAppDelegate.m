@@ -7,6 +7,7 @@
 //
 
 #import "TTAppDelegate.h"
+#import "TTTwitterClient.h"
 #import "TTSignInViewController.h"
 
 @implementation TTAppDelegate {
@@ -26,6 +27,13 @@
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification object:nil userInfo:[NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey]];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
     return YES;
 }
 

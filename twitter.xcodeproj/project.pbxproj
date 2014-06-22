@@ -24,6 +24,7 @@
 		96B85580195693E600552A01 /* TTSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8557E195693E600552A01 /* TTSignInViewController.m */; };
 		96B85581195693E600552A01 /* TTSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B8557F195693E600552A01 /* TTSignInViewController.xib */; };
 		96B85584195696AC00552A01 /* UIColor+Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B85583195696AC00552A01 /* UIColor+Twitter.m */; };
+		96B855881956A6EF00552A01 /* TTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855871956A6EF00552A01 /* TTUser.m */; };
 		B6EA23E9D0C44764A293ECFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3C60C19BF4478CA2E5A4BC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		96B8557F195693E600552A01 /* TTSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TTSignInViewController.xib; path = ViewControllers/TTSignInViewController.xib; sourceTree = "<group>"; };
 		96B85582195696AC00552A01 /* UIColor+Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Twitter.h"; path = "Utilities/UIColor+Twitter.h"; sourceTree = "<group>"; };
 		96B85583195696AC00552A01 /* UIColor+Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Twitter.m"; path = "Utilities/UIColor+Twitter.m"; sourceTree = "<group>"; };
+		96B855861956A6EF00552A01 /* TTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTUser.h; path = Models/TTUser.h; sourceTree = "<group>"; };
+		96B855871956A6EF00552A01 /* TTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTUser.m; path = Models/TTUser.m; sourceTree = "<group>"; };
 		BA7A92AB56A044D188D37707 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +185,8 @@
 		96B8557419566EB500552A01 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				96B855861956A6EF00552A01 /* TTUser.h */,
+				96B855871956A6EF00552A01 /* TTUser.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				96B85584195696AC00552A01 /* UIColor+Twitter.m in Sources */,
 				96B8557A1956766500552A01 /* TTTwitterClient.m in Sources */,
 				96B85580195693E600552A01 /* TTSignInViewController.m in Sources */,
+				96B855881956A6EF00552A01 /* TTUser.m in Sources */,
 				96B855511956665E00552A01 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
