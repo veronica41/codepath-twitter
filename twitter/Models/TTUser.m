@@ -23,7 +23,7 @@ static TTUser *_currentUser;
         if (data) {
             NSError * error = nil;
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-            if (!dict) {
+            if (error) {
                 NSLog(@"Error parsing JSON: %@", error);
             } else {
                 error = nil;
@@ -40,8 +40,8 @@ static TTUser *_currentUser;
 + (void)setCurrentUser:(TTUser *)currentUser {
     if (currentUser) {
         NSError * error = nil;
-        NSData *data = [NSJSONSerialization dataWithJSONObject:currentUser.dictionaryValue options:NSJSONWritingPrettyPrinted error:&error];
-        if (!data) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:[MTLJSONAdapter JSONDictionaryFromModel:currentUser] options:NSJSONWritingPrettyPrinted error:&error];
+        if (error) {
              NSLog(@"Error parsing JSON: %@", error);
         } else {
             [[NSUserDefaults standardUserDefaults] setObject:data forKey:currentUserKey];
@@ -68,5 +68,10 @@ static TTUser *_currentUser;
              @"profileImageUrl" : @"profile_image_url"
              };
 }
+
++ (NSValueTransformer *)profileImageUrlSONTransformer {
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
 
 @end

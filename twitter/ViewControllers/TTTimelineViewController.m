@@ -9,10 +9,12 @@
 #import "TTTimelineViewController.h"
 #import "TTTwitterClient.h"
 #import "TTUser.h"
+#import "TTTweet.h"
 
 @interface TTTimelineViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *tweets;
 
 @end
 
@@ -43,7 +45,8 @@
 
 - (void)reload {
     [[TTTwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"response: %@", response);
+        NSLog(@"response: %@", response[0]);
+        _tweets = [TTTweet tweetsFromJSONArray:response];
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"home timeline request error: %@", error);

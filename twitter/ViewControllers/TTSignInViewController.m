@@ -26,11 +26,11 @@
         [[TTTwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
             NSError *error = nil;
             TTUser *user = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:response error:&error];
-            if (user) {
+            if (error) {
+                [self showError:error];
+            } else {
                 [TTUser setCurrentUser:user];
                 NSLog(@"current user: %@", user);
-            } else {
-                [self showError:error];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self showError:error];
