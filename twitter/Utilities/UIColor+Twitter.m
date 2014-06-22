@@ -13,7 +13,7 @@
 + (UIColor *)twitterBlueColor {
     static UIColor *twitterBlueColor = nil;
     if (!twitterBlueColor){
-        twitterBlueColor = [UIColor colorWithRed:64/255.0 green:153/255.0 blue:255/255.0 alpha:1.0];
+        twitterBlueColor = [UIColor colorWithRed:85/255.0 green:172/255.0 blue:238/255.0 alpha:1.0];
     }
     return twitterBlueColor;
 }

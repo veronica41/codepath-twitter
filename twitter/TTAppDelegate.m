@@ -10,14 +10,24 @@
 #import "TTTwitterClient.h"
 #import "TTUser.h"
 #import "TTSignInViewController.h"
+#import "TTTimelineViewController.h"
+#import "UIColor+Twitter.h"
 
 @implementation TTAppDelegate {
     TTSignInViewController * _signInViewController;
+    UINavigationController * _navigationController;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    // set styles for navigation bar
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor twitterBlueColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+                                                           
 
     [self updateRootController];
 
@@ -67,7 +77,7 @@
 
 - (void)updateRootController {
     if ([TTUser currentUser]) {
-        
+        self.window.rootViewController = self.navigationController;
     } else {
         self.window.rootViewController = self.signInViewController;
     }
@@ -80,4 +90,12 @@
     return _signInViewController;
 }
 
+- (UINavigationController *)navigationController {
+    if (!_navigationController) {
+        TTTimelineViewController * controller = [[TTTimelineViewController alloc] init];
+        _navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+        _navigationController.navigationBar.translucent = NO;
+    }
+    return _navigationController;
+}
 @end
