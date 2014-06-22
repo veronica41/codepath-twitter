@@ -8,6 +8,7 @@
 
 #import "TTAppDelegate.h"
 #import "TTTwitterClient.h"
+#import "TTUser.h"
 #import "TTSignInViewController.h"
 
 @implementation TTAppDelegate {
@@ -20,10 +21,8 @@
 
     [self updateRootController];
 
-    /*
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLoginNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootVC) name:UserDidLogoutNotification object:nil];
-    */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootController) name:UserDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootController) name:UserDidLogoutNotification object:nil];
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -67,7 +66,11 @@
 #pragma mark - Private methods
 
 - (void)updateRootController {
-    self.window.rootViewController = self.signInViewController;
+    if ([TTUser currentUser]) {
+        
+    } else {
+        self.window.rootViewController = self.signInViewController;
+    }
 }
 
 - (TTSignInViewController *)signInViewController {

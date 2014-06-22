@@ -6,12 +6,16 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Mantle.h"
 
 extern NSString *const UserDidLoginNotification;
 extern NSString *const UserDidLogoutNotification;
 
-@interface TTUser : NSObject
+@interface TTUser : MTLModel <MTLJSONSerializing>
+
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *screenName;
+@property (nonatomic, strong) NSURL * profileImageUrl;
 
 + (TTUser *)currentUser;
 + (void)setCurrentUser:(TTUser *)currentUser;

@@ -8,6 +8,7 @@
 
 #import "TTSignInViewController.h"
 #import "TTTwitterClient.h"
+#import "TTUser.h"
 
 #define CALLBACK_URL @"tweeeetttter:/authorized"
 
@@ -45,8 +46,14 @@
 - (IBAction)signinButtonHandler:(id)sender {
     [[TTTwitterClient instance] authorizeWithCallbackUrl:[NSURL URLWithString:CALLBACK_URL] success:^(AFOAuth1Token *accessToken, id responseObject) {
         [[TTTwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
-            NSLog(@"Verify credentials response: %@", response);
-            
+            NSError *error = nil;
+            TTUser *user = [[TTUser alloc] initWithDictionary:response[@"response"] error:&error];
+            if (user) {
+                [TTUser setCurrentUser:user];
+                NSLog(@"current user: %@", user);
+            } else {
+                [self showError:error];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self showError:error];
         }];

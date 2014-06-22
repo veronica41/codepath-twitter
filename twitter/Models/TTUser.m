@@ -23,8 +23,14 @@ static TTUser *_currentUser;
         if (data) {
             NSError * error = nil;
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-            if (!error) {
-                //_currentUser = [[TTUser alloc] initWithDictionary:dict];
+            if (!dict) {
+                NSLog(@"Error parsing JSON: %@", error);
+            } else {
+                error = nil;
+                _currentUser = [[TTUser alloc] initWithDictionary:dict error:&error];
+                if (error) {
+                     NSLog(@"Error: %@", error);
+                }
             }
         }
     }
@@ -32,9 +38,42 @@ static TTUser *_currentUser;
 }
 
 + (void)setCurrentUser:(TTUser *)currentUser {
+    if (currentUser) {
+        NSError * error = nil;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:currentUser.dictionaryValue options:NSJSONWritingPrettyPrinted error:&error];
+        if (!data) {
+             NSLog(@"Error parsing JSON: %@", error);
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:currentUserKey];
+        }
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:currentUserKey];
+        [TTTwitterClient instance].accessToken = nil;
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    if (!_currentUser && currentUser) {
+        _currentUser = currentUser;
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLoginNotification object:nil];
+    } else  if (_currentUser && !currentUser) {
+        _currentUser = currentUser;
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserDidLogoutNotification object:nil];
+    }
     
 }
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{@"name": @"name",
+             @"screenName" : @"screen_name",
+             @"profileImageUrl" : @"profile_image_url"
+             };
+}
+
++ (NSValueTransformer *)profileImageUrlJSONTransformer {
+    return [MTLValueTransformer transformerWithBlock:^(NSString *urlString) {
+        return [NSURL URLWithString:urlString];
+    }];
+}
 
 
 @end
