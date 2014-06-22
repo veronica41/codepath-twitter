@@ -59,6 +59,20 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
     [self getPath:@"1.1/account/verify_credentials.json" parameters:nil success:success failure:failure];
 }
 
+#pragma mark - Statuses API
+
+- (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(int)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (count <= 0) count = 20;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"count": @(count)}];
+    if (sinceId > 0) {
+        [params setObject:@(sinceId) forKey:@"since_id"];
+    }
+    if (maxId > 0) {
+        [params setObject:@(maxId) forKey:@"max_id"];
+    }
+    [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
+}
+
 #pragma mark - Override
 
 - (void)setAccessToken:(AFOAuth1Token *)accessToken {

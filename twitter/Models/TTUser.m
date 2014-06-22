@@ -69,11 +69,4 @@ static TTUser *_currentUser;
              };
 }
 
-+ (NSValueTransformer *)profileImageUrlJSONTransformer {
-    return [MTLValueTransformer transformerWithBlock:^(NSString *urlString) {
-        return [NSURL URLWithString:urlString];
-    }];
-}
-
-
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "TTTimelineViewController.h"
+#import "TTTwitterClient.h"
 #import "TTUser.h"
 
 @interface TTTimelineViewController ()
@@ -36,6 +37,17 @@
     self.navigationItem.title = @"Home";
     self.navigationItem.leftBarButtonItem = signOutButton;
     self.navigationItem.rightBarButtonItem = newButton;
+
+    [self reload];
+}
+
+- (void)reload {
+    [[TTTwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"response: %@", response);
+        [_tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"home timeline request error: %@", error);
+    }];
 }
 
 #pragma mark - Button handlers

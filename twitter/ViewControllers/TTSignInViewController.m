@@ -21,33 +21,11 @@
 
 @implementation TTSignInViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (IBAction)signinButtonHandler:(id)sender {
     [[TTTwitterClient instance] authorizeWithCallbackUrl:[NSURL URLWithString:CALLBACK_URL] success:^(AFOAuth1Token *accessToken, id responseObject) {
         [[TTTwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
             NSError *error = nil;
-            TTUser *user = [[TTUser alloc] initWithDictionary:response[@"response"] error:&error];
+            TTUser *user = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:response error:&error];
             if (user) {
                 [TTUser setCurrentUser:user];
                 NSLog(@"current user: %@", user);
