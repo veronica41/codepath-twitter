@@ -16,9 +16,15 @@
 @property (nonatomic, copy) NSString *tweetID;
 @property (nonatomic) NSInteger retweetCount;
 @property (nonatomic) NSInteger favoriteCount;
-@property (nonatomic, copy) TTUser *user;
+@property (nonatomic) BOOL retweeted;
+@property (nonatomic) BOOL favorited;
+@property (nonatomic, copy) TTUser *author;
+@property (nonatomic, copy) TTUser *retweetUser;
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *originalText;
 @property (nonatomic, copy) NSDate *createdAt;
-@property (nonatomic, copy) TTTweet *retweetedStatus;
+
+- (NSString *)timeAgoString;
+- (NSString *)retweetedLabelString;
 
 @end

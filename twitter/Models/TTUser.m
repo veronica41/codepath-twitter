@@ -73,5 +73,8 @@ static TTUser *_currentUser;
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
+- (NSString *)screenNameString {
+    return [NSString stringWithFormat:@"@%@", _screenName];
+}
 
 @end

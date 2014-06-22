@@ -19,5 +19,6 @@ extern NSString *const UserDidLogoutNotification;
 
 + (TTUser *)currentUser;
 + (void)setCurrentUser:(TTUser *)currentUser;
+- (NSString *)screenNameString;
 
 @end

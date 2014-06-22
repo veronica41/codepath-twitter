@@ -7,6 +7,7 @@
 //
 
 #import "TTTweet.h"
+#import "NSDate+DateTools.h"
 
 @implementation TTTweet
 
@@ -24,13 +25,47 @@
     return @{@"tweetID" : @"id_str",
              @"retweetCount" : @"retweet_count",
              @"favoriteCount" : @"favorite_count",
-             @"user" : @"user",
+             @"retweeted" : @"retweeted",
+             @"favorited" : @"favorited",
+             @"author" : @"retweeted_status",
+             @"retweetUser" : @"user",
              @"text" : @"text",
-             @"createdAt" : @"created_at",
-             @"retweetedStatus" : @"retweeted_status"
+             @"originalText" : @"retweeted_status",
+             @"createdAt" : @"created_at"
              };
 }
 
++ (NSValueTransformer *)authorJSONTransformer {
+    return [MTLValueTransformer transformerWithBlock:^(NSDictionary *retweetedStatus) {
+        NSDictionary *userDict = retweetedStatus[@"user"];
+        NSError *error = nil;
+        TTUser *user = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:userDict error:&error];
+        if (error) {
+            NSLog(@"authorJSONTransformer Error: %@", error);
+        }
+        return user;
+    }];
+}
 
+/*
+ The text in the original tweet that was retweeted
+ */
++ (NSValueTransformer *)originalTextJSONTransformer {
+    return [MTLValueTransformer transformerWithBlock:^(NSDictionary *retweetedStatus) {
+        return retweetedStatus[@"text"];
+    }];
+}
+
+- (NSString *)timeAgoString {
+    return _createdAt.shortTimeAgoSinceNow;
+}
+
+- (NSString *)retweetedLabelString {
+    if (_retweetUser) {
+        return [NSString stringWithFormat:@"%@ retweeted", _retweetUser.name];
+        
+    }
+    return nil;
+}
 
 @end

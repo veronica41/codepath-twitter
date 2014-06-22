@@ -18,7 +18,20 @@
 
 - (void)setTweet:(TTTweet *)tweet {
     _tweet = tweet;
-   // [_profileImage setImageWithURL:tweet.user.profileImageUrl];
+    if (tweet.retweetUser) {
+        _retweetLabel.text = tweet.retweetedLabelString;
+    }
+    [_profileImage setImageWithURL:tweet.author.profileImageUrl];
+    _userNameLabel.text = tweet.author.name;
+    _userScreenNameLabel.text = tweet.author.screenNameString;
+    _dateLabel.text = tweet.timeAgoString;
+    _tweetLabel.text = tweet.originalText ? tweet.originalText : tweet.text;
+    if (tweet.retweeted) {
+        _retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
+    }
+    if (tweet.favorited) {
+        _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
