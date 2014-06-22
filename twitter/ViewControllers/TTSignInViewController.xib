@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TTSignInViewController">
             <connections>
+                <outlet property="signinButton" destination="o1C-sE-g2q" id="fLN-3E-kzd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,22 +15,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bird_blue_48" translatesAutoresizingMaskIntoConstraints="NO" id="381-1V-Spx">
-                    <rect key="frame" x="138" y="175" width="44" height="35"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bird_blue_48" translatesAutoresizingMaskIntoConstraints="NO" id="381-1V-Spx">
+                    <rect key="frame" x="138" y="211" width="44" height="35"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="2Qp-iI-JlR"/>
+                        <constraint firstAttribute="width" constant="44" id="XXu-cU-N5q"/>
+                    </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1C-sE-g2q">
-                    <rect key="frame" x="95" y="290" width="130" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1C-sE-g2q">
+                    <rect key="frame" x="70" y="316" width="180" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="Fso-IH-nig"/>
+                        <constraint firstAttribute="height" constant="40" id="UFG-C9-L3w"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                     <inset key="contentEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="Sign in with Twitter">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                    <state key="normal" title="Sign in with Twitter"/>
+                    <connections>
+                        <action selector="signinButtonHandler:" destination="-1" eventType="touchUpInside" id="PqX-Tu-6eP"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="381-1V-Spx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="211" id="I7V-zc-gfm"/>
+                <constraint firstItem="o1C-sE-g2q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="70" id="aTr-Rn-LAP"/>
+                <constraint firstItem="381-1V-Spx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="138" id="cAN-JG-nFN"/>
+                <constraint firstItem="o1C-sE-g2q" firstAttribute="top" secondItem="381-1V-Spx" secondAttribute="bottom" constant="70" id="cso-6R-2O8"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

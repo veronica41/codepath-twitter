@@ -7,8 +7,14 @@
 //
 
 #import "TTSignInViewController.h"
+#import "TTTwitterClient.h"
+
+#define CALLBACK_URL @"tweeeetttter://authorized"
 
 @interface TTSignInViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *signinButton;
+- (IBAction)signinButtonHandler:(id)sender;
 
 @end
 
@@ -26,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +41,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)signinButtonHandler:(id)sender {
+    [[TTTwitterClient instance] authorizeWithCallbackUrl:[NSURL URLWithString:CALLBACK_URL] success:^(AFOAuth1Token *accessToken, id responseObject) {
+        [[TTTwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
+            NSLog(@"Verify credentials response: %@", response);
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self showError:error];
+        }];
+    } failure:^(NSError *error) {
+        [self showError:error];
+    }];
+}
+
+- (void)showError:(NSError *)error {
+    NSLog(@"Sign in Error: %@", error);
+    [[[UIAlertView alloc] initWithTitle:@"Sign in Error"
+                                message:@"Cannot sign in with Twitter, please try again later!"
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil] show];
+
+}
 @end
