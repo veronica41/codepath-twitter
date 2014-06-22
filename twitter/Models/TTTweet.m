@@ -47,12 +47,31 @@
     }];
 }
 
++ (NSValueTransformer *)retweetUserJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:TTUser.class];
+}
+
 /*
  The text in the original tweet that was retweeted
  */
 + (NSValueTransformer *)originalTextJSONTransformer {
     return [MTLValueTransformer transformerWithBlock:^(NSDictionary *retweetedStatus) {
         return retweetedStatus[@"text"];
+    }];
+}
+
++ (NSDateFormatter *)dateFormatter {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    dateFormatter.dateFormat = @"EEE MMM dd HH:mm:ss ZZZZ yyyy'";
+    return dateFormatter;
+}
+
++ (NSValueTransformer *)createdAtJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [self.dateFormatter dateFromString:str];
+    } reverseBlock:^(NSDate *date) {
+        return [self.dateFormatter stringFromDate:date];
     }];
 }
 
@@ -63,7 +82,6 @@
 - (NSString *)retweetedLabelString {
     if (_retweetUser) {
         return [NSString stringWithFormat:@"%@ retweeted", _retweetUser.name];
-        
     }
     return nil;
 }

@@ -121,7 +121,7 @@
                 <outlet property="profileImage" destination="lBz-2k-SUo" id="jJl-CV-Ybd"/>
                 <outlet property="replyImageView" destination="jB4-bU-zpx" id="zbC-32-lKG"/>
                 <outlet property="retweetImageView" destination="C1Z-OK-q10" id="7bW-wM-TU2"/>
-                <outlet property="retweetLabel" destination="F2X-yc-kOB" id="o9i-sQ-uEB"/>
+                <outlet property="retweetLabel" destination="2Qv-Sv-Zi1" id="aTH-X8-Mqx"/>
                 <outlet property="textLabel" destination="Dlu-SW-Wax" id="LvF-hB-2tU"/>
                 <outlet property="tweetLabel" destination="Dlu-SW-Wax" id="pV5-Vg-yHd"/>
                 <outlet property="userNameLabel" destination="F2X-yc-kOB" id="cBp-iu-JWs"/>

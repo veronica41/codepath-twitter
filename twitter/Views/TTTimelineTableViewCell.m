@@ -11,9 +11,9 @@
 
 @implementation TTTimelineTableViewCell
 
-- (void)awakeFromNib
-{
-    // Initialization code
+- (void)awakeFromNib {
+    _profileImage.image = nil;
+    self.userInteractionEnabled = NO;
 }
 
 - (void)setTweet:(TTTweet *)tweet {
@@ -21,7 +21,7 @@
     if (tweet.retweetUser) {
         _retweetLabel.text = tweet.retweetedLabelString;
     }
-    [_profileImage setImageWithURL:tweet.author.profileImageUrl];
+    [_profileImage setImageWithURL:[NSURL URLWithString:tweet.retweetUser.profileImageUrl]];
     _userNameLabel.text = tweet.author.name;
     _userScreenNameLabel.text = tweet.author.screenNameString;
     _dateLabel.text = tweet.timeAgoString;
@@ -32,12 +32,6 @@
     if (tweet.favorited) {
         _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
     }
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end
