@@ -9,6 +9,13 @@
 #import "TTTimelineTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 
+@interface TTTimelineTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tweeterLabelVerticalConstraint;
+
+@end
+
+
 @implementation TTTimelineTableViewCell
 
 - (void)awakeFromNib {
@@ -20,8 +27,7 @@
     if (tweet.retweetedLabelString) {
         _retweetLabel.text = tweet.retweetedLabelString;
     } else {
-        _retweetLabel.text = @"abc";
-        //_retweetedMarkImageView.image = nil;
+        [self removeRetweetedViews];
     }
     [_profileImage setImageWithURL:[NSURL URLWithString:tweet.author.profileImageUrl]];
     _userNameLabel.text = tweet.author.name;
@@ -41,6 +47,18 @@
     [super layoutSubviews];
     _tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
     [super layoutSubviews];
+}
+
+- (void)removeRetweetedViews {
+    [_retweetedMarkImageView removeFromSuperview];
+    [_retweetLabel removeFromSuperview];
+    if (_tweeterLabelVerticalConstraint) {
+        [self.contentView removeConstraint:_tweeterLabelVerticalConstraint];
+    }
+    NSDictionary *views = NSDictionaryOfVariableBindings(_profileImage, _tweetLabel);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(12)-[_profileImage]" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(34)-[_tweetLabel]" options:0 metrics:nil views:views]];
+    [self updateConstraints];
 }
 
 @end

@@ -111,19 +111,19 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Dlu-SW-Wax" firstAttribute="leading" secondItem="lBz-2k-SUo" secondAttribute="trailing" constant="8" id="1js-9f-aso"/>
+                    <constraint firstItem="Dlu-SW-Wax" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="57" id="23z-EI-vEI"/>
                     <constraint firstItem="0mf-Lj-vc0" firstAttribute="leading" secondItem="C1Z-OK-q10" secondAttribute="trailing" constant="40" id="4Kb-jt-Y3W"/>
                     <constraint firstItem="C1Z-OK-q10" firstAttribute="leading" secondItem="jB4-bU-zpx" secondAttribute="trailing" constant="40" id="4Mg-br-B1E"/>
                     <constraint firstItem="F2X-yc-kOB" firstAttribute="leading" secondItem="lBz-2k-SUo" secondAttribute="trailing" constant="8" id="57s-yG-FYI"/>
-                    <constraint firstItem="lBz-2k-SUo" firstAttribute="top" secondItem="kP5-JF-3Y5" secondAttribute="bottom" constant="7" id="6wo-Z2-IjG"/>
                     <constraint firstItem="0mf-Lj-vc0" firstAttribute="top" secondItem="jB4-bU-zpx" secondAttribute="top" id="7jk-dR-IcY"/>
+                    <constraint firstAttribute="bottom" secondItem="jB4-bU-zpx" secondAttribute="bottom" constant="8" id="FXI-2y-sRe"/>
                     <constraint firstItem="2Qv-Sv-Zi1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="GBb-Gm-iuO"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0mf-Lj-vc0" secondAttribute="bottom" constant="8" id="GDN-ZB-Qqk"/>
                     <constraint firstItem="jB4-bU-zpx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="KVS-NH-hnS"/>
                     <constraint firstItem="kP5-JF-3Y5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="LxA-22-Aah"/>
                     <constraint firstItem="F2X-yc-kOB" firstAttribute="top" secondItem="lBz-2k-SUo" secondAttribute="top" id="NQ6-z6-0Ph"/>
+                    <constraint firstItem="jB4-bU-zpx" firstAttribute="top" secondItem="Dlu-SW-Wax" secondAttribute="bottom" constant="7" id="SyW-YQ-85N"/>
                     <constraint firstAttribute="trailing" secondItem="8Js-Xe-oZt" secondAttribute="trailing" constant="16" id="Zko-MD-AHc"/>
-                    <constraint firstItem="jB4-bU-zpx" firstAttribute="top" secondItem="Dlu-SW-Wax" secondAttribute="bottom" constant="7" id="bgf-ir-e7j"/>
-                    <constraint firstAttribute="bottom" secondItem="0mf-Lj-vc0" secondAttribute="bottom" constant="8" id="cH8-uo-HB6"/>
                     <constraint firstItem="lBz-2k-SUo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cUr-Cp-aGn"/>
                     <constraint firstItem="2Qv-Sv-Zi1" firstAttribute="leading" secondItem="kP5-JF-3Y5" secondAttribute="trailing" constant="8" id="d1T-fb-DKd"/>
                     <constraint firstItem="kP5-JF-3Y5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="36" id="dxD-ig-FXn"/>
@@ -131,8 +131,8 @@
                     <constraint firstItem="lBz-2k-SUo" firstAttribute="top" secondItem="8Js-Xe-oZt" secondAttribute="top" id="pPm-nR-fgJ"/>
                     <constraint firstItem="2Qv-Sv-Zi1" firstAttribute="leading" secondItem="kP5-JF-3Y5" secondAttribute="trailing" constant="8" id="sOz-lN-nRJ"/>
                     <constraint firstItem="8Js-Xe-oZt" firstAttribute="leading" secondItem="JDw-J6-UTs" secondAttribute="trailing" constant="8" id="ssK-Sc-n7K"/>
+                    <constraint firstItem="lBz-2k-SUo" firstAttribute="top" secondItem="kP5-JF-3Y5" secondAttribute="bottom" constant="7" id="syJ-df-1KE"/>
                     <constraint firstItem="lBz-2k-SUo" firstAttribute="top" secondItem="JDw-J6-UTs" secondAttribute="top" id="tia-NL-RWM"/>
-                    <constraint firstItem="Dlu-SW-Wax" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="57" id="u5L-6H-RcD"/>
                     <constraint firstItem="JDw-J6-UTs" firstAttribute="leading" secondItem="F2X-yc-kOB" secondAttribute="trailing" constant="8" id="uIM-xR-V1P"/>
                     <constraint firstItem="lBz-2k-SUo" firstAttribute="top" secondItem="F2X-yc-kOB" secondAttribute="top" id="yQp-Uy-Zw5"/>
                     <constraint firstItem="0mf-Lj-vc0" firstAttribute="top" secondItem="C1Z-OK-q10" secondAttribute="top" id="yRY-rj-WzV"/>
@@ -148,6 +148,7 @@
                 <outlet property="retweetedMarkImageView" destination="kP5-JF-3Y5" id="5iN-qY-DfO"/>
                 <outlet property="textLabel" destination="Dlu-SW-Wax" id="LvF-hB-2tU"/>
                 <outlet property="tweetLabel" destination="Dlu-SW-Wax" id="pV5-Vg-yHd"/>
+                <outlet property="tweeterLabelVerticalConstraint" destination="23z-EI-vEI" id="1Yj-O7-lp6"/>
                 <outlet property="userNameLabel" destination="F2X-yc-kOB" id="cBp-iu-JWs"/>
                 <outlet property="userScreenNameLabel" destination="JDw-J6-UTs" id="9oy-ev-wwh"/>
             </connections>

@@ -87,6 +87,9 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TTTimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
     cell.tweet = _tweets[indexPath.row];
+    if (!cell.tweet.retweetedLabelString) {
+        NSLog(@"%d : %@", indexPath.row, cell.tweet.tweetString);
+    }
     return cell;
 }
 
