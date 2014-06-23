@@ -11,6 +11,7 @@
 #import "TTUser.h"
 #import "TTTweet.h"
 #import "TTTimelineTableViewCell.h"
+#import "MBProgressHUD.h"
 
 static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 
@@ -18,8 +19,8 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *tweets;
-
 @property (nonatomic, strong) TTTimelineTableViewCell *prototypeCell;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -52,20 +53,44 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
     [_tableView registerNib:timelineCellNib forCellReuseIdentifier:timelineCellIdentifier];
     _prototypeCell = [_tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier];
     [self reload];
+
+    // setup refresh control
+    _refreshControl = [[UIRefreshControl alloc] init];
+    [_refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+    [_tableView addSubview:_refreshControl];
 }
 
 - (void)reload {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[TTTwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        _tweets = [TTTweet tweetsFromJSONArray:response];
-        [_tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _tweets = [TTTweet tweetsFromJSONArray:response];
+            [_tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [_refreshControl endRefreshing];
+        });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"home timeline request error: %@", error);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [_refreshControl endRefreshing];
+        });
     }];
 }
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _tweets.count;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TTTimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
+    cell.tweet = _tweets[indexPath.row];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
     return 151;
@@ -81,14 +106,7 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TTTimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
-    cell.tweet = _tweets[indexPath.row];
-    return cell;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     
 }
 
