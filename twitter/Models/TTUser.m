@@ -27,7 +27,7 @@ static TTUser *_currentUser;
                 NSLog(@"Error parsing JSON: %@", error);
             } else {
                 error = nil;
-                _currentUser = [[TTUser alloc] initWithDictionary:dict error:&error];
+                _currentUser = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:dict error:&error];
                 if (error) {
                      NSLog(@"Error: %@", error);
                 }

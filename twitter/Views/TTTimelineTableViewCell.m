@@ -12,26 +12,35 @@
 @implementation TTTimelineTableViewCell
 
 - (void)awakeFromNib {
-    _profileImage.image = nil;
-    self.userInteractionEnabled = NO;
+    _tweetLabel.text = nil;
 }
 
 - (void)setTweet:(TTTweet *)tweet {
     _tweet = tweet;
-    if (tweet.retweetUser) {
+    if (tweet.retweetedLabelString) {
         _retweetLabel.text = tweet.retweetedLabelString;
+    } else {
+        _retweetLabel.text = @"abc";
+        //_retweetedMarkImageView.image = nil;
     }
-    [_profileImage setImageWithURL:[NSURL URLWithString:tweet.retweetUser.profileImageUrl]];
+    [_profileImage setImageWithURL:[NSURL URLWithString:tweet.author.profileImageUrl]];
     _userNameLabel.text = tweet.author.name;
     _userScreenNameLabel.text = tweet.author.screenNameString;
     _dateLabel.text = tweet.timeAgoString;
-    _tweetLabel.text = tweet.originalText ? tweet.originalText : tweet.text;
+    _tweetLabel.text = tweet.tweetString;
     if (tweet.retweeted) {
         _retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
     }
     if (tweet.favorited) {
         _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
     }
+    [self layoutIfNeeded];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
+    [super layoutSubviews];
 }
 
 @end

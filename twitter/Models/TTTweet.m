@@ -27,15 +27,22 @@
              @"favoriteCount" : @"favorite_count",
              @"retweeted" : @"retweeted",
              @"favorited" : @"favorited",
-             @"author" : @"retweeted_status",
-             @"retweetUser" : @"user",
+             @"user" : @"user",
              @"text" : @"text",
-             @"originalText" : @"retweeted_status",
+             @"retweetedStatusUser" : @"retweeted_status",
+             @"retweetedStatusText" : @"retweeted_status",
              @"createdAt" : @"created_at"
              };
 }
 
-+ (NSValueTransformer *)authorJSONTransformer {
++ (NSValueTransformer *)userJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:TTUser.class];
+}
+
+/*
+ [@"retweeted_status"][@"user"]
+ */
++ (NSValueTransformer *)retweetedStatusUserJSONTransformer {
     return [MTLValueTransformer transformerWithBlock:^(NSDictionary *retweetedStatus) {
         NSDictionary *userDict = retweetedStatus[@"user"];
         NSError *error = nil;
@@ -47,14 +54,10 @@
     }];
 }
 
-+ (NSValueTransformer *)retweetUserJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:TTUser.class];
-}
-
 /*
- The text in the original tweet that was retweeted
+ [@"retweeted_status"][@"text"]
  */
-+ (NSValueTransformer *)originalTextJSONTransformer {
++ (NSValueTransformer *)retweetedStatusTextJSONTransformer {
     return [MTLValueTransformer transformerWithBlock:^(NSDictionary *retweetedStatus) {
         return retweetedStatus[@"text"];
     }];
@@ -75,15 +78,30 @@
     }];
 }
 
-- (NSString *)timeAgoString {
-    return _createdAt.shortTimeAgoSinceNow;
-}
+#pragma mark - API
 
 - (NSString *)retweetedLabelString {
-    if (_retweetUser) {
-        return [NSString stringWithFormat:@"%@ retweeted", _retweetUser.name];
+    if (_retweetedStatusUser) {
+        return [NSString stringWithFormat:@"%@ retweeted", _user.name];
     }
     return nil;
+}
+- (TTUser *)author {
+    if (_retweetedStatusUser) {
+        return _retweetedStatusUser;
+    }
+    return _user;
+}
+
+- (NSString *)tweetString {
+    if (_retweetedStatusText) {
+        return _retweetedStatusText;
+    }
+    return _text;
+}
+
+- (NSString *)timeAgoString {
+    return [_createdAt shortTimeAgoSinceNow];
 }
 
 @end

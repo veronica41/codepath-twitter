@@ -73,7 +73,6 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     _prototypeCell.tweet = _tweets[indexPath.row];
-    [_prototypeCell layoutSubviews];
     CGSize size = [_prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height+1;
 }

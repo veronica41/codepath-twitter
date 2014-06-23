@@ -13,8 +13,9 @@
 
 @property (nonatomic, strong) TTTweet *tweet;
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImageView;
 @property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userScreenNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;

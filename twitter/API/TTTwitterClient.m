@@ -12,8 +12,15 @@
 
 #define TWITTER_BASE_URL [NSURL URLWithString:@"https://api.twitter.com/"]
 
+/*
 #define TWITTER_CONSUMER_KEY @"o6umqnPD7QRXoHIDQzuUYXWdB"
 #define TWITTER_CONSUMER_SECRET @"c1xm2B32T9uXH7QccNBgQpVeUOjvC6Akkrdz94oJMbHE51pSYx"
+*/
+
+#define TWITTER_CONSUMER_KEY @"biYAqubJD0rK2cRatIQTZw"
+#define TWITTER_CONSUMER_SECRET @"2cygl2irBgMQVNuWJwMn6vXiyDnWtht7gSyuRnf0Fg"
+
+
 
 // used in keychain
 static NSString * const serviceName =  @"tweeeetttter";
