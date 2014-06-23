@@ -13,6 +13,10 @@
     Tweet *_tweet;
 }
 
+- (void)awakeFromNib {
+    _tweetLabel.text = nil;
+}
+
 - (void)setTweet:(Tweet *)tweet andProfileImage:(UIImage *)image {
     _tweet = tweet;
     if (tweet.retweetedLabelString) {

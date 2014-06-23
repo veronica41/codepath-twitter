@@ -60,20 +60,24 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   // switch (indexPath.row) {
-       // case 0: {
+    switch (indexPath.row) {
+        case 0:
             return _tweetDetailCell;
-       // }
-  //  }
-  //  return cell;
+        case 1:
+            return [[UITableViewCell alloc] init];
+        case 2:
+            return [[UITableViewCell alloc] init];
+    }
+    return nil;
 }
 
 #pragma mark - UITableViewDelegate
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        CGSize size = [_tweetDetailCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-        return size.height+1;
+        CGFloat height = _tweetDetailCell.tweetLabel.frame.size.height;
+        return height+124;
     }
     return 48;
 }

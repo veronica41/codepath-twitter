@@ -15,18 +15,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="bfl-IC-G7g">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bfl-IC-G7g">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="scrollIndicatorInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="bfl-IC-G7g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RNT-Od-ALc"/>
-                <constraint firstAttribute="trailing" secondItem="bfl-IC-G7g" secondAttribute="trailing" id="hyU-Wm-0NC"/>
-                <constraint firstAttribute="bottom" secondItem="bfl-IC-G7g" secondAttribute="bottom" id="nFL-fK-bmc"/>
-                <constraint firstItem="bfl-IC-G7g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zQ7-py-DPa"/>
+                <constraint firstAttribute="bottom" secondItem="bfl-IC-G7g" secondAttribute="bottom" id="3yQ-kJ-kJW"/>
+                <constraint firstItem="bfl-IC-G7g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LZy-Rf-Oqk"/>
+                <constraint firstAttribute="trailing" secondItem="bfl-IC-G7g" secondAttribute="trailing" id="UWq-2n-IuG"/>
+                <constraint firstItem="bfl-IC-G7g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WoI-SA-maA"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
