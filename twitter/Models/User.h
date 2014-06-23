@@ -11,14 +11,14 @@
 extern NSString *const UserDidLoginNotification;
 extern NSString *const UserDidLogoutNotification;
 
-@interface TTUser : MTLModel <MTLJSONSerializing>
+@interface User : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *screenName;
 @property (nonatomic, copy, readonly) NSURL* profileImageUrl;
 
-+ (TTUser *)currentUser;
-+ (void)setCurrentUser:(TTUser *)currentUser;
++ (User *)currentUser;
++ (void)setCurrentUser:(User *)currentUser;
 - (NSString *)screenNameString;
 
 @end

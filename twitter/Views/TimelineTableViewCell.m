@@ -6,23 +6,19 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTTimelineTableViewCell.h"
+#import "TimelineTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface TTTimelineTableViewCell ()
+@interface TimelineTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tweeterLabelVerticalConstraint;
 
 @end
 
 
-@implementation TTTimelineTableViewCell
+@implementation TimelineTableViewCell
 
-- (void)awakeFromNib {
-    _tweetLabel.text = nil;
-}
-
-- (void)setTweet:(TTTweet *)tweet {
+- (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     if (tweet.retweetedLabelString) {
         _retweetLabel.text = tweet.retweetedLabelString;
@@ -40,7 +36,6 @@
     if (tweet.favorited) {
         _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
     }
-    [self layoutIfNeeded];
 }
 
 - (void)layoutSubviews {
@@ -53,12 +48,12 @@
     [_retweetedMarkImageView removeFromSuperview];
     [_retweetLabel removeFromSuperview];
     if (_tweeterLabelVerticalConstraint) {
-        [self.contentView removeConstraint:_tweeterLabelVerticalConstraint];
+       [self.contentView removeConstraint:_tweeterLabelVerticalConstraint];
     }
-    NSDictionary *views = NSDictionaryOfVariableBindings(_profileImage, _tweetLabel);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_profileImage, _tweetLabel, _userNameLabel, _replyImageView);
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(12)-[_profileImage]" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(34)-[_tweetLabel]" options:0 metrics:nil views:views]];
-    [self updateConstraints];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(35)-[_tweetLabel]" options:0 metrics:nil views:views]];
+    [_tweetLabel layoutSubviews];
 }
 
 @end

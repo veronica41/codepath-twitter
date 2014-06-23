@@ -6,25 +6,25 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTTimelineViewController.h"
-#import "TTTwitterClient.h"
-#import "TTUser.h"
-#import "TTTweet.h"
-#import "TTTimelineTableViewCell.h"
+#import "TimelineViewController.h"
+#import "TwitterClient.h"
+#import "User.h"
+#import "Tweet.h"
+#import "TimelineTableViewCell.h"
 #import "MBProgressHUD.h"
 
-static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
+static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
-@interface TTTimelineViewController ()
+@interface TimelineViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *tweets;
-@property (nonatomic, strong) TTTimelineTableViewCell *prototypeCell;
+@property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
-@implementation TTTimelineViewController
+@implementation TimelineViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,9 +62,9 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 
 - (void)reload {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[TTTwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _tweets = [TTTweet tweetsFromJSONArray:response];
+            _tweets = [Tweet tweetsFromJSONArray:response];
             [_tableView reloadData];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [_refreshControl endRefreshing];
@@ -85,7 +85,7 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TTTimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
+    TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
     cell.tweet = _tweets[indexPath.row];
     if (!cell.tweet.retweetedLabelString) {
         NSLog(@"%d : %@", indexPath.row, cell.tweet.tweetString);
@@ -116,7 +116,7 @@ static NSString * timelineCellIdentifier = @"TTTimelineTableViewCell";
 #pragma mark - Button handlers
 
 - (void)signOutButtonHandler:(id)sender {
-    [TTUser setCurrentUser:nil];
+    [User setCurrentUser:nil];
 }
 
 - (void)newButtonHandler:(id)sender {

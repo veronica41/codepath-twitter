@@ -7,9 +7,9 @@
 //
 
 #import "Mantle.h"
-#import "TTUser.h"
+#import "User.h"
 
-@interface TTTweet : MTLModel <MTLJSONSerializing>
+@interface Tweet : MTLModel <MTLJSONSerializing>
 
 + (NSArray *)tweetsFromJSONArray:(NSArray *)array;
 
@@ -18,14 +18,14 @@
 @property (nonatomic) NSInteger favoriteCount;
 @property (nonatomic) BOOL retweeted;
 @property (nonatomic) BOOL favorited;
-@property (nonatomic, copy) TTUser *user;
+@property (nonatomic, copy) User *user;
 @property (nonatomic, copy) NSString *text;
-@property (nonatomic, copy) TTUser *retweetedStatusUser;
+@property (nonatomic, copy) User *retweetedStatusUser;
 @property (nonatomic, copy) NSString *retweetedStatusText;
 @property (nonatomic, copy) NSDate *createdAt;
 
 - (NSString *)retweetedLabelString;
-- (TTUser *)author;
+- (User *)author;
 - (NSString *)tweetString;
 - (NSString *)timeAgoString;
 

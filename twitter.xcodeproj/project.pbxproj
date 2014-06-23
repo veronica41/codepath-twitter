@@ -7,29 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		965D7B0A1957FD6A00CC00EC /* TweetViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965D7B081957FD6A00CC00EC /* TweetViewViewController.m */; };
+		965D7B0B1957FD6A00CC00EC /* TweetViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965D7B091957FD6A00CC00EC /* TweetViewViewController.xib */; };
 		96B855451956665E00552A01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855441956665E00552A01 /* Foundation.framework */; };
 		96B855471956665E00552A01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855461956665E00552A01 /* CoreGraphics.framework */; };
 		96B855491956665E00552A01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855481956665E00552A01 /* UIKit.framework */; };
 		96B8554F1956665E00552A01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B8554D1956665E00552A01 /* InfoPlist.strings */; };
 		96B855511956665E00552A01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855501956665E00552A01 /* main.m */; };
-		96B855551956665E00552A01 /* TTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855541956665E00552A01 /* TTAppDelegate.m */; };
+		96B855551956665E00552A01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855541956665E00552A01 /* AppDelegate.m */; };
 		96B855571956665E00552A01 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96B855561956665E00552A01 /* Images.xcassets */; };
 		96B8555E1956665E00552A01 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B8555D1956665E00552A01 /* XCTest.framework */; };
 		96B8555F1956665E00552A01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855441956665E00552A01 /* Foundation.framework */; };
 		96B855601956665E00552A01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855481956665E00552A01 /* UIKit.framework */; };
 		96B855681956665E00552A01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 96B855661956665E00552A01 /* InfoPlist.strings */; };
 		96B8556A1956665E00552A01 /* twitterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855691956665E00552A01 /* twitterTests.m */; };
-		96B8557A1956766500552A01 /* TTTwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855791956766500552A01 /* TTTwitterClient.m */; };
+		96B8557A1956766500552A01 /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855791956766500552A01 /* TwitterClient.m */; };
 		96B8557C1956839A00552A01 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B8557B1956839A00552A01 /* Security.framework */; };
-		96B85580195693E600552A01 /* TTSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8557E195693E600552A01 /* TTSignInViewController.m */; };
-		96B85581195693E600552A01 /* TTSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B8557F195693E600552A01 /* TTSignInViewController.xib */; };
+		96B85580195693E600552A01 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8557E195693E600552A01 /* SignInViewController.m */; };
+		96B85581195693E600552A01 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B8557F195693E600552A01 /* SignInViewController.xib */; };
 		96B85584195696AC00552A01 /* UIColor+Twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B85583195696AC00552A01 /* UIColor+Twitter.m */; };
-		96B855881956A6EF00552A01 /* TTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855871956A6EF00552A01 /* TTUser.m */; };
-		96B8558C1956C08100552A01 /* TTTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8558A1956C08100552A01 /* TTTimelineViewController.m */; };
-		96B8558D1956C08100552A01 /* TTTimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B8558B1956C08100552A01 /* TTTimelineViewController.xib */; };
-		96B855901956D44D00552A01 /* TTTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8558F1956D44D00552A01 /* TTTweet.m */; };
-		96B855941956EBD800552A01 /* TTTimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855921956EBD800552A01 /* TTTimelineTableViewCell.m */; };
-		96B855951956EBD800552A01 /* TTTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B855931956EBD800552A01 /* TTTimelineTableViewCell.xib */; };
+		96B855881956A6EF00552A01 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855871956A6EF00552A01 /* User.m */; };
+		96B8558C1956C08100552A01 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8558A1956C08100552A01 /* TimelineViewController.m */; };
+		96B8558D1956C08100552A01 /* TimelineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B8558B1956C08100552A01 /* TimelineViewController.xib */; };
+		96B855901956D44D00552A01 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8558F1956D44D00552A01 /* Tweet.m */; };
+		96B855941956EBD800552A01 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855921956EBD800552A01 /* TimelineTableViewCell.m */; };
+		96B855951956EBD800552A01 /* TimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B855931956EBD800552A01 /* TimelineTableViewCell.xib */; };
 		B6EA23E9D0C44764A293ECFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3C60C19BF4478CA2E5A4BC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,9 @@
 
 /* Begin PBXFileReference section */
 		6B3C60C19BF4478CA2E5A4BC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		965D7B071957FD6A00CC00EC /* TweetViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetViewViewController.h; path = ViewControllers/TweetViewViewController.h; sourceTree = "<group>"; };
+		965D7B081957FD6A00CC00EC /* TweetViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetViewViewController.m; path = ViewControllers/TweetViewViewController.m; sourceTree = "<group>"; };
+		965D7B091957FD6A00CC00EC /* TweetViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetViewViewController.xib; path = ViewControllers/TweetViewViewController.xib; sourceTree = "<group>"; };
 		96B855411956665E00552A01 /* twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B855441956665E00552A01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		96B855461956665E00552A01 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,32 +58,32 @@
 		96B8554E1956665E00552A01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		96B855501956665E00552A01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		96B855521956665E00552A01 /* twitter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "twitter-Prefix.pch"; sourceTree = "<group>"; };
-		96B855531956665E00552A01 /* TTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTAppDelegate.h; sourceTree = "<group>"; };
-		96B855541956665E00552A01 /* TTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTAppDelegate.m; sourceTree = "<group>"; };
+		96B855531956665E00552A01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		96B855541956665E00552A01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		96B855561956665E00552A01 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		96B8555C1956665E00552A01 /* twitterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = twitterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B8555D1956665E00552A01 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		96B855651956665E00552A01 /* twitterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "twitterTests-Info.plist"; sourceTree = "<group>"; };
 		96B855671956665E00552A01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		96B855691956665E00552A01 /* twitterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = twitterTests.m; sourceTree = "<group>"; };
-		96B855781956766500552A01 /* TTTwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTwitterClient.h; path = API/TTTwitterClient.h; sourceTree = "<group>"; };
-		96B855791956766500552A01 /* TTTwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTwitterClient.m; path = API/TTTwitterClient.m; sourceTree = "<group>"; };
+		96B855781956766500552A01 /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterClient.h; path = API/TwitterClient.h; sourceTree = "<group>"; };
+		96B855791956766500552A01 /* TwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterClient.m; path = API/TwitterClient.m; sourceTree = "<group>"; };
 		96B8557B1956839A00552A01 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		96B8557D195693E600552A01 /* TTSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTSignInViewController.h; path = ViewControllers/TTSignInViewController.h; sourceTree = "<group>"; };
-		96B8557E195693E600552A01 /* TTSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTSignInViewController.m; path = ViewControllers/TTSignInViewController.m; sourceTree = "<group>"; };
-		96B8557F195693E600552A01 /* TTSignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TTSignInViewController.xib; path = ViewControllers/TTSignInViewController.xib; sourceTree = "<group>"; };
+		96B8557D195693E600552A01 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = ViewControllers/SignInViewController.h; sourceTree = "<group>"; };
+		96B8557E195693E600552A01 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = ViewControllers/SignInViewController.m; sourceTree = "<group>"; };
+		96B8557F195693E600552A01 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignInViewController.xib; path = ViewControllers/SignInViewController.xib; sourceTree = "<group>"; };
 		96B85582195696AC00552A01 /* UIColor+Twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Twitter.h"; path = "Utilities/UIColor+Twitter.h"; sourceTree = "<group>"; };
 		96B85583195696AC00552A01 /* UIColor+Twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Twitter.m"; path = "Utilities/UIColor+Twitter.m"; sourceTree = "<group>"; };
-		96B855861956A6EF00552A01 /* TTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTUser.h; path = Models/TTUser.h; sourceTree = "<group>"; };
-		96B855871956A6EF00552A01 /* TTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTUser.m; path = Models/TTUser.m; sourceTree = "<group>"; };
-		96B855891956C08100552A01 /* TTTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTimelineViewController.h; path = ViewControllers/TTTimelineViewController.h; sourceTree = "<group>"; };
-		96B8558A1956C08100552A01 /* TTTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTimelineViewController.m; path = ViewControllers/TTTimelineViewController.m; sourceTree = "<group>"; };
-		96B8558B1956C08100552A01 /* TTTimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TTTimelineViewController.xib; path = ViewControllers/TTTimelineViewController.xib; sourceTree = "<group>"; };
-		96B8558E1956D44D00552A01 /* TTTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTweet.h; path = Models/TTTweet.h; sourceTree = "<group>"; };
-		96B8558F1956D44D00552A01 /* TTTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTweet.m; path = Models/TTTweet.m; sourceTree = "<group>"; };
-		96B855911956EBD800552A01 /* TTTimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTimelineTableViewCell.h; path = Views/TTTimelineTableViewCell.h; sourceTree = "<group>"; };
-		96B855921956EBD800552A01 /* TTTimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTimelineTableViewCell.m; path = Views/TTTimelineTableViewCell.m; sourceTree = "<group>"; };
-		96B855931956EBD800552A01 /* TTTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TTTimelineTableViewCell.xib; path = Views/TTTimelineTableViewCell.xib; sourceTree = "<group>"; };
+		96B855861956A6EF00552A01 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		96B855871956A6EF00552A01 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
+		96B855891956C08100552A01 /* TimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimelineViewController.h; path = ViewControllers/TimelineViewController.h; sourceTree = "<group>"; };
+		96B8558A1956C08100552A01 /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimelineViewController.m; path = ViewControllers/TimelineViewController.m; sourceTree = "<group>"; };
+		96B8558B1956C08100552A01 /* TimelineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimelineViewController.xib; path = ViewControllers/TimelineViewController.xib; sourceTree = "<group>"; };
+		96B8558E1956D44D00552A01 /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tweet.h; path = Models/Tweet.h; sourceTree = "<group>"; };
+		96B8558F1956D44D00552A01 /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tweet.m; path = Models/Tweet.m; sourceTree = "<group>"; };
+		96B855911956EBD800552A01 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimelineTableViewCell.h; path = Views/TimelineTableViewCell.h; sourceTree = "<group>"; };
+		96B855921956EBD800552A01 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimelineTableViewCell.m; path = Views/TimelineTableViewCell.m; sourceTree = "<group>"; };
+		96B855931956EBD800552A01 /* TimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimelineTableViewCell.xib; path = Views/TimelineTableViewCell.xib; sourceTree = "<group>"; };
 		BA7A92AB56A044D188D37707 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,8 +154,8 @@
 				96B8557419566EB500552A01 /* Models */,
 				96B8557519566ECC00552A01 /* Views */,
 				96B8557619566ED700552A01 /* ViewControllers */,
-				96B855531956665E00552A01 /* TTAppDelegate.h */,
-				96B855541956665E00552A01 /* TTAppDelegate.m */,
+				96B855531956665E00552A01 /* AppDelegate.h */,
+				96B855541956665E00552A01 /* AppDelegate.m */,
 				96B855561956665E00552A01 /* Images.xcassets */,
 				96B8554B1956665E00552A01 /* Supporting Files */,
 			);
@@ -189,8 +194,8 @@
 		96B8557319566EAE00552A01 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				96B855781956766500552A01 /* TTTwitterClient.h */,
-				96B855791956766500552A01 /* TTTwitterClient.m */,
+				96B855781956766500552A01 /* TwitterClient.h */,
+				96B855791956766500552A01 /* TwitterClient.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -198,10 +203,10 @@
 		96B8557419566EB500552A01 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				96B855861956A6EF00552A01 /* TTUser.h */,
-				96B855871956A6EF00552A01 /* TTUser.m */,
-				96B8558E1956D44D00552A01 /* TTTweet.h */,
-				96B8558F1956D44D00552A01 /* TTTweet.m */,
+				96B855861956A6EF00552A01 /* User.h */,
+				96B855871956A6EF00552A01 /* User.m */,
+				96B8558E1956D44D00552A01 /* Tweet.h */,
+				96B8558F1956D44D00552A01 /* Tweet.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -209,9 +214,9 @@
 		96B8557519566ECC00552A01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				96B855911956EBD800552A01 /* TTTimelineTableViewCell.h */,
-				96B855921956EBD800552A01 /* TTTimelineTableViewCell.m */,
-				96B855931956EBD800552A01 /* TTTimelineTableViewCell.xib */,
+				96B855911956EBD800552A01 /* TimelineTableViewCell.h */,
+				96B855921956EBD800552A01 /* TimelineTableViewCell.m */,
+				96B855931956EBD800552A01 /* TimelineTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -219,12 +224,15 @@
 		96B8557619566ED700552A01 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				96B8557D195693E600552A01 /* TTSignInViewController.h */,
-				96B8557E195693E600552A01 /* TTSignInViewController.m */,
-				96B8557F195693E600552A01 /* TTSignInViewController.xib */,
-				96B855891956C08100552A01 /* TTTimelineViewController.h */,
-				96B8558A1956C08100552A01 /* TTTimelineViewController.m */,
-				96B8558B1956C08100552A01 /* TTTimelineViewController.xib */,
+				96B8557D195693E600552A01 /* SignInViewController.h */,
+				96B8557E195693E600552A01 /* SignInViewController.m */,
+				96B8557F195693E600552A01 /* SignInViewController.xib */,
+				96B855891956C08100552A01 /* TimelineViewController.h */,
+				96B8558A1956C08100552A01 /* TimelineViewController.m */,
+				96B8558B1956C08100552A01 /* TimelineViewController.xib */,
+				965D7B071957FD6A00CC00EC /* TweetViewViewController.h */,
+				965D7B081957FD6A00CC00EC /* TweetViewViewController.m */,
+				965D7B091957FD6A00CC00EC /* TweetViewViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -316,11 +324,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B855951956EBD800552A01 /* TTTimelineTableViewCell.xib in Resources */,
+				96B855951956EBD800552A01 /* TimelineTableViewCell.xib in Resources */,
+				965D7B0B1957FD6A00CC00EC /* TweetViewViewController.xib in Resources */,
 				96B8554F1956665E00552A01 /* InfoPlist.strings in Resources */,
-				96B85581195693E600552A01 /* TTSignInViewController.xib in Resources */,
+				96B85581195693E600552A01 /* SignInViewController.xib in Resources */,
 				96B855571956665E00552A01 /* Images.xcassets in Resources */,
-				96B8558D1956C08100552A01 /* TTTimelineViewController.xib in Resources */,
+				96B8558D1956C08100552A01 /* TimelineViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,15 +381,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B855551956665E00552A01 /* TTAppDelegate.m in Sources */,
+				96B855551956665E00552A01 /* AppDelegate.m in Sources */,
 				96B85584195696AC00552A01 /* UIColor+Twitter.m in Sources */,
-				96B8557A1956766500552A01 /* TTTwitterClient.m in Sources */,
-				96B8558C1956C08100552A01 /* TTTimelineViewController.m in Sources */,
-				96B85580195693E600552A01 /* TTSignInViewController.m in Sources */,
-				96B855901956D44D00552A01 /* TTTweet.m in Sources */,
-				96B855941956EBD800552A01 /* TTTimelineTableViewCell.m in Sources */,
-				96B855881956A6EF00552A01 /* TTUser.m in Sources */,
+				96B8557A1956766500552A01 /* TwitterClient.m in Sources */,
+				96B8558C1956C08100552A01 /* TimelineViewController.m in Sources */,
+				96B85580195693E600552A01 /* SignInViewController.m in Sources */,
+				96B855901956D44D00552A01 /* Tweet.m in Sources */,
+				96B855941956EBD800552A01 /* TimelineTableViewCell.m in Sources */,
+				96B855881956A6EF00552A01 /* User.m in Sources */,
 				96B855511956665E00552A01 /* main.m in Sources */,
+				965D7B0A1957FD6A00CC00EC /* TweetViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

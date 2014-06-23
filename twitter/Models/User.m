@@ -6,18 +6,18 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTUser.h"
-#import "TTTwitterClient.h"
+#import "User.h"
+#import "TwitterClient.h"
 
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 NSString * const currentUserKey = @"CurrentUserKey";
 
-@implementation TTUser
+@implementation User
 
-static TTUser *_currentUser;
+static User *_currentUser;
 
-+ (TTUser *)currentUser {
++ (User *)currentUser {
     if (!_currentUser) {
         NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:currentUserKey];
         if (data) {
@@ -27,7 +27,7 @@ static TTUser *_currentUser;
                 NSLog(@"Error parsing JSON: %@", error);
             } else {
                 error = nil;
-                _currentUser = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:dict error:&error];
+                _currentUser = [MTLJSONAdapter modelOfClass:User.class fromJSONDictionary:dict error:&error];
                 if (error) {
                      NSLog(@"Error: %@", error);
                 }
@@ -37,7 +37,7 @@ static TTUser *_currentUser;
     return _currentUser;
 }
 
-+ (void)setCurrentUser:(TTUser *)currentUser {
++ (void)setCurrentUser:(User *)currentUser {
     if (currentUser) {
         NSError * error = nil;
         NSData *data = [NSJSONSerialization dataWithJSONObject:[MTLJSONAdapter JSONDictionaryFromModel:currentUser] options:NSJSONWritingPrettyPrinted error:&error];
@@ -48,7 +48,7 @@ static TTUser *_currentUser;
         }
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:currentUserKey];
-        [TTTwitterClient instance].accessToken = nil;
+        [TwitterClient instance].accessToken = nil;
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
 

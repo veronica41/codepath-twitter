@@ -8,9 +8,9 @@
 
 #import "AFOAuth1Client.h"
 
-@interface TTTwitterClient : AFOAuth1Client
+@interface TwitterClient : AFOAuth1Client
 
-+ (TTTwitterClient *)instance;
++ (TwitterClient *)instance;
 
 - (void)authorizeWithCallbackUrl:(NSURL *)callbackUrl success:(void (^) (AFOAuth1Token *accessToken, id responseObject))success failure:(void (^) (NSError *error))failure;
 - (void)currentUserWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;

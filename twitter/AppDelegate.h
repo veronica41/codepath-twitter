@@ -1,5 +1,5 @@
 //
-//  TTSignInViewController.h
+//  TTAppDelegate.h
 //  twitter
 //
 //  Created by Veronica Zheng on 6/21/14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TTSignInViewController : UIViewController
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end

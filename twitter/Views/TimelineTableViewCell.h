@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TTTweet.h"
+#import "Tweet.h"
 
-@interface TTTimelineTableViewCell : UITableViewCell
+@interface TimelineTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) TTTweet *tweet;
+@property (nonatomic, strong) Tweet *tweet;
 
 @property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImageView;
 @property (weak, nonatomic) IBOutlet UILabel *retweetLabel;

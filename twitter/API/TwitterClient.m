@@ -6,36 +6,29 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTTwitterClient.h"
+#import "TwitterClient.h"
 #import "AFNetworking.h"
 #import "UICKeyChainStore.h"
 
 #define TWITTER_BASE_URL [NSURL URLWithString:@"https://api.twitter.com/"]
 
-/*
 #define TWITTER_CONSUMER_KEY @"o6umqnPD7QRXoHIDQzuUYXWdB"
 #define TWITTER_CONSUMER_SECRET @"c1xm2B32T9uXH7QccNBgQpVeUOjvC6Akkrdz94oJMbHE51pSYx"
-*/
-
-#define TWITTER_CONSUMER_KEY @"biYAqubJD0rK2cRatIQTZw"
-#define TWITTER_CONSUMER_SECRET @"2cygl2irBgMQVNuWJwMn6vXiyDnWtht7gSyuRnf0Fg"
-
-
 
 // used in keychain
 static NSString * const serviceName =  @"tweeeetttter";
 static NSString * const accessTokenKey = @"AccessTokenKey";
 
-@implementation TTTwitterClient {
+@implementation TwitterClient {
     UICKeyChainStore *_store;
 }
 
-+ (TTTwitterClient *)instance {
-    static TTTwitterClient *instance;
++ (TwitterClient *)instance {
+    static TwitterClient *instance;
     static dispatch_once_t once;
 
     dispatch_once(&once, ^{
-        instance = [[TTTwitterClient alloc] initWithBaseURL:TWITTER_BASE_URL key:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
+        instance = [[TwitterClient alloc] initWithBaseURL:TWITTER_BASE_URL key:TWITTER_CONSUMER_KEY secret:TWITTER_CONSUMER_SECRET];
     });
     return instance;
 }

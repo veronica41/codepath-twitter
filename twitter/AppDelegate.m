@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTAppDelegate.h"
-#import "TTTwitterClient.h"
-#import "TTUser.h"
-#import "TTSignInViewController.h"
-#import "TTTimelineViewController.h"
+#import "AppDelegate.h"
+#import "TwitterClient.h"
+#import "User.h"
+#import "SignInViewController.h"
+#import "TimelineViewController.h"
 #import "UIColor+Twitter.h"
 
-@implementation TTAppDelegate {
-    TTSignInViewController * _signInViewController;
+@implementation AppDelegate {
+    SignInViewController * _signInViewController;
     UINavigationController * _navigationController;
 }
 
@@ -76,23 +76,23 @@
 #pragma mark - Private methods
 
 - (void)updateRootController {
-    if ([TTUser currentUser]) {
+    if ([User currentUser]) {
         self.window.rootViewController = self.navigationController;
     } else {
         self.window.rootViewController = self.signInViewController;
     }
 }
 
-- (TTSignInViewController *)signInViewController {
+- (SignInViewController *)signInViewController {
     if (!_signInViewController) {
-        _signInViewController = [[TTSignInViewController alloc] init];
+        _signInViewController = [[SignInViewController alloc] init];
     }
     return _signInViewController;
 }
 
 - (UINavigationController *)navigationController {
     if (!_navigationController) {
-        TTTimelineViewController * controller = [[TTTimelineViewController alloc] init];
+        TimelineViewController * controller = [[TimelineViewController alloc] init];
         _navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
         _navigationController.navigationBar.translucent = NO;
     }

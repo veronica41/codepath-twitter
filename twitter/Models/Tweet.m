@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTTweet.h"
+#import "Tweet.h"
 #import "NSDate+DateTools.h"
 
-@implementation TTTweet
+@implementation Tweet
 
 + (NSArray *)tweetsFromJSONArray:(NSArray *)array {
     NSError *error;
-    NSArray *tweets = [MTLJSONAdapter modelsOfClass:TTTweet.class fromJSONArray:array error:&error];
+    NSArray *tweets = [MTLJSONAdapter modelsOfClass:Tweet.class fromJSONArray:array error:&error];
     if (error) {
         NSLog(@"Error converting JSON array: %@", error);
         return nil;
@@ -36,7 +36,7 @@
 }
 
 + (NSValueTransformer *)userJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:TTUser.class];
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:User.class];
 }
 
 /*
@@ -46,7 +46,7 @@
     return [MTLValueTransformer transformerWithBlock:^(NSDictionary *retweetedStatus) {
         NSDictionary *userDict = retweetedStatus[@"user"];
         NSError *error = nil;
-        TTUser *user = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:userDict error:&error];
+        User *user = [MTLJSONAdapter modelOfClass:User.class fromJSONDictionary:userDict error:&error];
         if (error) {
             NSLog(@"authorJSONTransformer Error: %@", error);
         }
@@ -86,7 +86,7 @@
     }
     return nil;
 }
-- (TTUser *)author {
+- (User *)author {
     if (_retweetedStatusUser) {
         return _retweetedStatusUser;
     }

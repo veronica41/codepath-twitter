@@ -6,30 +6,30 @@
 //  Copyright (c) 2014 Veronica Zheng. All rights reserved.
 //
 
-#import "TTSignInViewController.h"
-#import "TTTwitterClient.h"
-#import "TTUser.h"
+#import "SignInViewController.h"
+#import "TwitterClient.h"
+#import "User.h"
 
 #define CALLBACK_URL @"tweeeetttter:/authorized"
 
-@interface TTSignInViewController ()
+@interface SignInViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *signinButton;
 - (IBAction)signinButtonHandler:(id)sender;
 
 @end
 
-@implementation TTSignInViewController
+@implementation SignInViewController
 
 - (IBAction)signinButtonHandler:(id)sender {
-    [[TTTwitterClient instance] authorizeWithCallbackUrl:[NSURL URLWithString:CALLBACK_URL] success:^(AFOAuth1Token *accessToken, id responseObject) {
-        [[TTTwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance] authorizeWithCallbackUrl:[NSURL URLWithString:CALLBACK_URL] success:^(AFOAuth1Token *accessToken, id responseObject) {
+        [[TwitterClient instance] currentUserWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
             NSError *error = nil;
-            TTUser *user = [MTLJSONAdapter modelOfClass:TTUser.class fromJSONDictionary:response error:&error];
+            User *user = [MTLJSONAdapter modelOfClass:User.class fromJSONDictionary:response error:&error];
             if (error) {
                 [self showError:error];
             } else {
-                [TTUser setCurrentUser:user];
+                [User setCurrentUser:user];
                 NSLog(@"current user: %@", user);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
