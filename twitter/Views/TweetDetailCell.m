@@ -15,6 +15,7 @@
 
 - (void)awakeFromNib {
     _tweetLabel.text = nil;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setTweet:(Tweet *)tweet andProfileImage:(UIImage *)image {

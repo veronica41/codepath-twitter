@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)setRetweetCount:(NSInteger)retweetCount andFavoriteCount:(NSInteger)favoriteCount {
