@@ -11,6 +11,7 @@
 #import "User.h"
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
+#import "TweetViewController.h"
 #import "MBProgressHUD.h"
 
 static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
@@ -87,15 +88,12 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
     cell.tweet = _tweets[indexPath.row];
-    if (!cell.tweet.retweetedLabelString) {
-        NSLog(@"%d : %@", indexPath.row, cell.tweet.tweetString);
-    }
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 151;
 }
 
@@ -105,12 +103,11 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     return size.height+1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:_tweets[indexPath.row] andProfileImage:cell.profileImage.image];
+    [self.navigationController pushViewController:tweetController animated:YES];
+    [self.navigationController.view clipsToBounds];
 }
 
 #pragma mark - Button handlers

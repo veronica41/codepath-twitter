@@ -1,5 +1,5 @@
 //
-//  TTTweetViewViewController.h
+//  TweetStaticCell.h
 //  twitter
 //
 //  Created by Veronica Zheng on 6/22/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TweetViewViewController : UIViewController
+@interface TweetCountCell : UITableViewCell
 
 @end
