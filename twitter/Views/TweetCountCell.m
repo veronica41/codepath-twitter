@@ -15,6 +15,11 @@
     // Initialization code
 }
 
+- (void)setRetweetCount:(NSInteger)retweetCount andFavoriteCount:(NSInteger)favoriteCount {
+    _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", retweetCount];
+    _favoriteCountLabel.text = [NSString stringWithFormat:@"%ld", favoriteCount];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

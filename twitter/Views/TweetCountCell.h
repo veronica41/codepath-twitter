@@ -10,4 +10,9 @@
 
 @interface TweetCountCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoriteCountLabel;
+
+- (void)setRetweetCount:(NSInteger)retweetCount andFavoriteCount:(NSInteger)favoriteCount;
+
 @end

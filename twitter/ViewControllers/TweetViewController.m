@@ -19,6 +19,8 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) TweetDetailCell *tweetDetailCell;
+@property (nonatomic, strong) TweetCountCell *tweetCountCell;
+@property (nonatomic, strong) TweetActionCell *tweetActionCell;
 
 @end
 
@@ -47,10 +49,22 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
     // setup the table view
     _tableView.dataSource = self;
     _tableView.delegate = self;
+
     UINib *tweetDetailCellNib = [UINib nibWithNibName:tweetDetailCellIdentifier bundle:nil];
     [_tableView registerNib:tweetDetailCellNib forCellReuseIdentifier:tweetDetailCellIdentifier];
     _tweetDetailCell = [_tableView dequeueReusableCellWithIdentifier:tweetDetailCellIdentifier];
     [_tweetDetailCell setTweet:_tweet andProfileImage:_profileImage];
+
+    UINib *tweetCountCellNib = [UINib nibWithNibName:tweetCountCellIdentifier bundle:nil];
+    [_tableView registerNib:tweetCountCellNib forCellReuseIdentifier:tweetCountCellIdentifier];
+    _tweetCountCell = [_tableView dequeueReusableCellWithIdentifier:tweetCountCellIdentifier];
+    [_tweetCountCell setRetweetCount:_tweet.retweetCount andFavoriteCount:_tweet.favoriteCount];
+
+    UINib *tweetActionCellNib = [UINib nibWithNibName:tweetActionCellIdentifier bundle:nil];
+    [_tableView registerNib:tweetActionCellNib forCellReuseIdentifier:tweetActionCellIdentifier];
+    _tweetActionCell = [_tableView dequeueReusableCellWithIdentifier:tweetActionCellIdentifier];
+    [_tweetActionCell setRetweeted:_tweet.retweeted];
+    [_tweetActionCell setFavorited:_tweet.favorited];
 }
 
 #pragma mark - UITableViewDataSource
@@ -64,9 +78,9 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
         case 0:
             return _tweetDetailCell;
         case 1:
-            return [[UITableViewCell alloc] init];
+            return _tweetCountCell;
         case 2:
-            return [[UITableViewCell alloc] init];
+            return _tweetActionCell;
     }
     return nil;
 }
@@ -79,11 +93,7 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
         CGFloat height = _tweetDetailCell.tweetLabel.frame.size.height;
         return height+124;
     }
-    return 48;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    return 50;
 }
 
 

@@ -15,11 +15,20 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+- (void)setRetweeted:(BOOL)retweeted {
+    if (retweeted) {
+        _retweetView.image = [UIImage imageNamed:@"retweet_on"];
+    } else {
+        _retweetView.image = [UIImage imageNamed:@"retweet"];
+    }
+}
 
-    // Configure the view for the selected state
+- (void)setFavorited:(BOOL)favorited {
+    if (favorited) {
+        _favoriteView.image = [UIImage imageNamed:@"favorite_on"];
+    } else {
+        _favoriteView.image = [UIImage imageNamed:@"favorite"];
+    }
 }
 
 @end

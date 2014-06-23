@@ -10,4 +10,11 @@
 
 @interface TweetActionCell : UITableViewCell
 
+@property (nonatomic) BOOL retweeted;
+@property (nonatomic) BOOL favorited;
+
+@property (weak, nonatomic) IBOutlet UIImageView *replyView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetView;
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteView;
+
 @end
