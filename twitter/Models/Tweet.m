@@ -78,6 +78,23 @@
     }];
 }
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        _tweetID = nil;
+        _retweetCount = 0;
+        _favoriteCount = 0;
+        _retweeted = NO;
+        _favorited = NO;
+        _user = nil;
+        _text = nil;
+        _retweetedStatusUser = nil;
+        _retweetedStatusText = nil;
+        _createdAt = [NSDate date];
+    }
+    return self;
+}
+
 #pragma mark - API
 
 - (NSString *)retweetedLabelString {

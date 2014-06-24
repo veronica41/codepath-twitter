@@ -103,6 +103,9 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: we will get into trouble if the user click the newly created status, go to the tweet detail view,
+    // and try to retweet or favorite from there !!!
+
     TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:_tweets[indexPath.row] andProfileImage:cell.profileImage.image];
     tweetController.delegate = self;
@@ -114,29 +117,11 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 - (void)createNewTweetWithStatus:(NSString *)status {
     User *user = [User currentUser];
-    NSDictionary *dict = @{@"name" : user.name,
-                    @"screen_name" : user.screenName,
-              @"profile_image_url" : user.profileImageUrl
-                           };
-    NSDate * now = [NSDate date];
-    NSString *dateString = [[Tweet dateFormatter] stringFromDate:now];
-    NSDictionary *tweet = @{@"id_str" : @"1",
-                        @"retweeted_status" : NSNull.null,
-                           @"retweet_count" : @0,
-                          @"favorite_count" : @0,
-                               @"retweeted" : @NO,
-                               @"favorited" : @NO,
-                                    @"user" : dict,
-                                    @"text" : status,
-                               @"createdAt" : dateString};
-    NSError *error = nil;
-    Tweet * newTweet = [[Tweet alloc] initWithDictionary:tweet error:&error];
-    if (error) {
-        NSLog(@"create new tweet error: %@", error);
-    } else {
-        [_tweets addObject:newTweet];
-        [self.tableView reloadData];
-    }
+    Tweet *tweet = [[Tweet alloc] init];
+    tweet.user = user;
+    tweet.text = status;
+    [_tweets insertObject:tweet atIndex:0];
+    [_tableView reloadData];
 }
 
 #pragma mark - TweetViewControllerDelegate

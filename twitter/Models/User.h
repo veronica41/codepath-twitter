@@ -13,9 +13,9 @@ extern NSString *const UserDidLogoutNotification;
 
 @interface User : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *screenName;
-@property (nonatomic, copy, readonly) NSURL* profileImageUrl;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *screenName;
+@property (nonatomic, copy) NSURL* profileImageUrl;
 
 + (User *)currentUser;
 + (void)setCurrentUser:(User *)currentUser;

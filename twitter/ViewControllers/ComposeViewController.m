@@ -87,10 +87,12 @@
     NSString * status = _tweetTextView.text;
     [[TwitterClient instance] postNewStatus:status success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"post status response : %@", response);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate createNewTweetWithStatus:status];
+        });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self showError:error];
     }];
-    [self.delegate createNewTweetWithStatus:status];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -61,6 +61,11 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
 
 #pragma mark - Statuses API
 
+- (void)getStatusWithID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/show/%@.json", statusID];
+    [self postPath:url parameters:nil success:success failure:failure];
+}
+
 - (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(int)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     if (count <= 0) count = 20;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"count": @(count)}];
