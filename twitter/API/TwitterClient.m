@@ -73,6 +73,45 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
     [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
 }
 
+- (void)postNewStatus:(NSString *)status
+                     success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (!status) return;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"status": status}];
+    [self postPath:@"1.1/statuses/update.json" parameters:params success:success failure:failure];
+}
+
+- (void)retweetWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (!statusID) return;
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", statusID];
+    [self postPath:url parameters:nil success:success failure:failure];
+}
+
+- (void)destroyStatusWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (!statusID) return;
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/destroy/%@.json", statusID];
+    [self postPath:url parameters:nil success:success failure:failure];
+}
+
+#pragma mark - Favorites APIs
+
+- (void)createFavoriteWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (!statusID) return;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id": statusID}];
+    [self postPath:@"1.1/favorites/create.json" parameters:params success:success failure:failure];
+}
+
+- (void)destroyFavoriteWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (!statusID) return;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id": statusID}];
+    [self postPath:@"1.1/favorites/destroy.json" parameters:params success:success failure:failure];
+}
+
+
 #pragma mark - Override
 
 - (void)setAccessToken:(AFOAuth1Token *)accessToken {

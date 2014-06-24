@@ -24,4 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
 
+- (void)setRetweeted:(BOOL)retweeted;
+- (void)setFavorited:(BOOL)favorited;
+
 @end

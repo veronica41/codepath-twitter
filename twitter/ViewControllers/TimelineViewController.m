@@ -7,12 +7,10 @@
 //
 
 #import "TimelineViewController.h"
-#import "ComposeViewController.h"
 #import "TwitterClient.h"
 #import "User.h"
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
-#import "TweetViewController.h"
 #import "MBProgressHUD.h"
 
 static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
@@ -20,7 +18,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 @interface TimelineViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *tweets;
+@property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -66,7 +64,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _tweets = [Tweet tweetsFromJSONArray:response];
+            _tweets = [[Tweet tweetsFromJSONArray:response] mutableCopy];
             [_tableView reloadData];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [_refreshControl endRefreshing];
@@ -107,8 +105,62 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:_tweets[indexPath.row] andProfileImage:cell.profileImage.image];
+    tweetController.delegate = self;
     [self.navigationController pushViewController:tweetController animated:YES];
     [self.navigationController.view clipsToBounds];
+}
+
+#pragma mark - ComposeViewControllerDelegate
+
+- (void)createNewTweetWithStatus:(NSString *)status {
+    User *user = [User currentUser];
+    NSDictionary *dict = @{@"name" : user.name,
+                    @"screen_name" : user.screenName,
+              @"profile_image_url" : user.profileImageUrl
+                           };
+    NSDate * now = [NSDate date];
+    NSString *dateString = [[Tweet dateFormatter] stringFromDate:now];
+    NSDictionary *tweet = @{@"id_str" : @"1",
+                        @"retweeted_status" : NSNull.null,
+                           @"retweet_count" : @0,
+                          @"favorite_count" : @0,
+                               @"retweeted" : @NO,
+                               @"favorited" : @NO,
+                                    @"user" : dict,
+                                    @"text" : status,
+                               @"createdAt" : dateString};
+    NSError *error = nil;
+    Tweet * newTweet = [[Tweet alloc] initWithDictionary:tweet error:&error];
+    if (error) {
+        NSLog(@"create new tweet error: %@", error);
+    } else {
+        [_tweets addObject:newTweet];
+        [self.tableView reloadData];
+    }
+}
+
+#pragma mark - TweetViewControllerDelegate
+
+- (void)retweetedStateChanged:(Tweet *)tweet {
+    [_tweets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Tweet *t = (Tweet *)obj;
+        if ([t.tweetID isEqualToString:tweet.tweetID]) {
+            t.retweeted = tweet.retweeted;
+            [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            *stop = YES;
+        }
+    }];
+}
+
+- (void)favoritedStateChanged:(Tweet *)tweet {
+    [_tweets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Tweet *t = (Tweet *)obj;
+        if ([t.tweetID isEqualToString:tweet.tweetID]) {
+            t.favorited = tweet.favorited;
+            [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            *stop = YES;
+        }
+    }];
 }
 
 #pragma mark - Button handlers
@@ -119,6 +171,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 - (void)newButtonHandler:(id)sender {
     ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeNew Tweet:nil];
+    controller.delegate = self;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];
 }

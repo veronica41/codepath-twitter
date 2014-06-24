@@ -14,10 +14,18 @@ typedef enum {
     TweetTypeReply = 1
 } TweetType;
 
+@protocol ComposeViewControllerDelegate <NSObject>
+
+- (void)createNewTweetWithStatus:(NSString *)status;
+
+@end
+
+
 @interface ComposeViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic) TweetType tweetType;
 @property (nonatomic, strong) Tweet *tweet;
+@property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 
 - (id)initWithTweetType:(TweetType)type  Tweet:(Tweet *)tweet;
 

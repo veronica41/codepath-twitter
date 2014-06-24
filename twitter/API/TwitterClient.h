@@ -14,6 +14,22 @@
 
 - (void)authorizeWithCallbackUrl:(NSURL *)callbackUrl success:(void (^) (AFOAuth1Token *accessToken, id responseObject))success failure:(void (^) (NSError *error))failure;
 - (void)currentUserWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 - (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(int)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)postNewStatus:(NSString *)status
+              success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)retweetWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)destroyStatusWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)createFavoriteWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)destroyFavoriteWithStatusID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 
 @end

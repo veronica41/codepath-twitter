@@ -16,6 +16,14 @@
 
 @implementation TimelineTableViewCell
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return self;
+}
+
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     if (tweet.retweetedLabelString) {
@@ -34,11 +42,25 @@
     _userScreenNameLabel.text = tweet.author.screenNameString;
     _dateLabel.text = tweet.timeAgoString;
     _tweetLabel.text = tweet.tweetString;
-    if (tweet.retweeted) {
+    [self setRetweeted:tweet.retweeted];
+    [self setFavorited:tweet.favorited];
+}
+
+- (void)setRetweeted:(BOOL)retweeted {
+    _tweet.retweeted = retweeted;
+    if (retweeted) {
         _retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
+    } else {
+        _retweetImageView.image = [UIImage imageNamed:@"retweet"];
     }
-    if (tweet.favorited) {
+}
+
+- (void)setFavorited:(BOOL)favorited {
+    _tweet.favorited = favorited;
+    if (favorited) {
         _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
+    } else {
+        _favoriteImageView.image = [UIImage imageNamed:@"favorite"];
     }
 }
 

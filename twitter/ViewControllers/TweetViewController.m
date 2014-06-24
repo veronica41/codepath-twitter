@@ -8,6 +8,7 @@
 
 #import "TweetViewController.h"
 #import "ComposeViewController.h"
+#import "TwitterClient.h"
 
 @interface TweetViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImage;
@@ -106,6 +107,54 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    // post the change to twitter
+    [self updateRetweeted];
+    [self updateFavorited];
+}
+
+- (void)updateRetweeted {
+    if (!_tweet.retweeted && _retweeted) {
+        [[TwitterClient instance] retweetWithStatusID:_tweet.tweetID success:^(AFHTTPRequestOperation *operation, id response) {
+            //NSLog(@"Response : %@", response);
+            _tweet.retweetID = response[@"id_str"];
+            NSLog(@"response: %@", _tweet.retweetID);
+            _tweet.retweeted = _retweeted;
+            [self.delegate retweetedStateChanged:_tweet];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"retweet error: %@", error);
+        }];
+    }
+    if (_tweet.retweeted && !_retweeted) {
+        [[TwitterClient instance] destroyStatusWithStatusID:_tweet.retweetID success:^(AFHTTPRequestOperation *operation, id response) {
+            NSLog(@"Response : %@", response);
+            _tweet.retweeted = _retweeted;
+            [self.delegate retweetedStateChanged:_tweet];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"retweet error: %@", error);
+        }];
+    }
+}
+
+- (void)updateFavorited {
+    if (!_tweet.favorited && _favorited) {
+        [[TwitterClient instance] createFavoriteWithStatusID:_tweet.tweetID success:^(AFHTTPRequestOperation *operation, id response) {
+            _tweet.favorited = _favorited;
+            [self.delegate favoritedStateChanged:_tweet];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"favorite error: %@", error);
+        }];
+    }
+    if (_tweet.favorited && !_favorited) {
+        [[TwitterClient instance] destroyFavoriteWithStatusID:_tweet.tweetID success:^(AFHTTPRequestOperation *operation, id response) {
+            NSLog(@"Response : %@", response);
+            _tweet.favorited = _favorited;
+            [self.delegate favoritedStateChanged:_tweet];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"favorite error: %@", error);
+        }];
+    }
+}
 
 #pragma mark - button handlers
 
@@ -119,8 +168,10 @@
     _retweeted = !_retweeted;
     [self setRetweetedState:_retweeted];
     if (_retweeted) {
-        _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.retweetCount+1];
+        _tweet.retweetCount += 1;
+        _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.retweetCount];
     } else {
+        _tweet.retweetCount -= 1;
         _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.retweetCount];
     }
 }
@@ -129,8 +180,10 @@
     _favorited = !_favorited;
     [self setFavoriteState:_favorited];
     if (_favorited) {
-        _favoritesCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.favoriteCount+1];
+        _tweet.favoriteCount += 1;
+        _favoritesCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.favoriteCount];
     } else {
+        _tweet.favoriteCount -= 1;
         _favoritesCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.favoriteCount];
     }
 }

@@ -10,6 +10,7 @@
 #import "User.h"
 #import "UIColor+Twitter.h"
 #import "UIImageView+AFNetworking.h"
+#import "TwitterClient.h"
 
 #define TWEET_LIMIT 140
 
@@ -83,7 +84,23 @@
 }
 
 - (void)tweetButtonHandler:(id)sender {
+    NSString * status = _tweetTextView.text;
+    [[TwitterClient instance] postNewStatus:status success:^(AFHTTPRequestOperation *operation, id response) {
+        NSLog(@"post status response : %@", response);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showError:error];
+    }];
+    [self.delegate createNewTweetWithStatus:status];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (void)showError:(NSError *)error {
+    NSLog(@"Post status error: %@", error);
+    [[[UIAlertView alloc] initWithTitle:@"Post status error"
+                            message:@"Cannot post status now, please try again later!"
+                           delegate:nil
+                  cancelButtonTitle:@"OK"
+                  otherButtonTitles:nil] show];
 }
 
 @end
