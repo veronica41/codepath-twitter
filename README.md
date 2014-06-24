@@ -21,7 +21,7 @@ Completed user stories:
 
 To install
 ```
-cd Yelp
+cd twitter
 pod install
 ```
 
