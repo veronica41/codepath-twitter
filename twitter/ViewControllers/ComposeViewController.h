@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
 
-@interface ComposeViewController : UIViewController
+typedef enum {
+    TweetTypeNew = 0,
+    TweetTypeReply = 1
+} TweetType;
+
+@interface ComposeViewController : UIViewController <UITextViewDelegate>
+
+@property (nonatomic) TweetType tweetType;
+@property (nonatomic, strong) Tweet *tweet;
+
+- (id)initWithTweetType:(TweetType)type  Tweet:(Tweet *)tweet;
 
 @end

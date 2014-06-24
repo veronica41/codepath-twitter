@@ -118,7 +118,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (void)newButtonHandler:(id)sender {
-    ComposeViewController * controller = [[ComposeViewController alloc] init];
+    ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeNew Tweet:nil];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposeViewController">
             <connections>
+                <outlet property="profileImageView" destination="t0H-ro-aST" id="4bC-Xb-VXz"/>
+                <outlet property="tweetTextView" destination="owc-Pw-Lbn" id="Rco-la-4oC"/>
+                <outlet property="userNameLabel" destination="NUb-Oe-otF" id="OMi-Gi-zKy"/>
+                <outlet property="userScreenNameLabel" destination="gPq-Lp-2i4" id="iyw-1k-zKX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,8 +17,50 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t0H-ro-aST">
+                    <rect key="frame" x="20" y="20" width="48" height="48"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="kpQ-cI-nFA"/>
+                        <constraint firstAttribute="height" constant="48" id="yeN-3K-NaQ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUb-Oe-otF">
+                    <rect key="frame" x="76" y="20" width="37" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-Lp-2i4">
+                    <rect key="frame" x="76" y="40" width="32" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owc-Pw-Lbn">
+                    <rect key="frame" x="20" y="84" width="280" height="484"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="owc-Pw-Lbn" secondAttribute="bottom" id="ET0-sj-hc3"/>
+                <constraint firstItem="NUb-Oe-otF" firstAttribute="leading" secondItem="t0H-ro-aST" secondAttribute="trailing" constant="8" id="JvB-9j-h5f"/>
+                <constraint firstItem="t0H-ro-aST" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="bBi-Nj-yw9"/>
+                <constraint firstItem="NUb-Oe-otF" firstAttribute="leading" secondItem="gPq-Lp-2i4" secondAttribute="leading" id="evB-A6-axT"/>
+                <constraint firstItem="owc-Pw-Lbn" firstAttribute="top" secondItem="t0H-ro-aST" secondAttribute="bottom" constant="16" id="hzw-Bw-DlU"/>
+                <constraint firstItem="owc-Pw-Lbn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="k8z-ld-SxG"/>
+                <constraint firstItem="gPq-Lp-2i4" firstAttribute="top" secondItem="NUb-Oe-otF" secondAttribute="bottom" constant="3" id="qyX-sd-gpf"/>
+                <constraint firstAttribute="trailing" secondItem="owc-Pw-Lbn" secondAttribute="trailing" constant="20" id="uGG-3s-CLn"/>
+                <constraint firstItem="t0H-ro-aST" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="ufi-Td-w19"/>
+                <constraint firstItem="t0H-ro-aST" firstAttribute="top" secondItem="NUb-Oe-otF" secondAttribute="top" id="zAg-Y5-UbT"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
