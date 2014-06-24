@@ -7,20 +7,22 @@
 //
 
 #import "TweetViewController.h"
-#import "TweetDetailCell.h"
-#import "TweetCountCell.h"
-#import "TweetActionCell.h"
-
-static NSString * tweetDetailCellIdentifier = @"TweetDetailCell";
-static NSString * tweetCountCellIdentifier = @"TweetCountCell";
-static NSString * tweetActionCellIdentifier = @"TweetActionCell";
 
 @interface TweetViewController ()
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) TweetDetailCell *tweetDetailCell;
-@property (nonatomic, strong) TweetCountCell *tweetCountCell;
-@property (nonatomic, strong) TweetActionCell *tweetActionCell;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImage;
+@property (weak, nonatomic) IBOutlet UILabel *retweetedLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userScreenNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoritesCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userNameTopConstraint;
 
 @end
 
@@ -40,78 +42,70 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
 {
     [super viewDidLoad];
     // setup the navigation bar
-    UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:self action:@selector(homeButtonHandler:)];
+    UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:nil action:nil];
     UIBarButtonItem *replyButton = [[UIBarButtonItem alloc] initWithTitle:@"Reply" style:UIBarButtonItemStylePlain target:self action:@selector(replyButtonHandler:)];
     self.navigationItem.title = @"Tweet";
     self.navigationItem.backBarButtonItem = homeButton;
     self.navigationItem.rightBarButtonItem = replyButton;
-    
-    // setup the table view
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
 
-    UINib *tweetDetailCellNib = [UINib nibWithNibName:tweetDetailCellIdentifier bundle:nil];
-    [_tableView registerNib:tweetDetailCellNib forCellReuseIdentifier:tweetDetailCellIdentifier];
-    _tweetDetailCell = [_tableView dequeueReusableCellWithIdentifier:tweetDetailCellIdentifier];
-    [_tweetDetailCell setTweet:_tweet andProfileImage:_profileImage];
-
-    UINib *tweetCountCellNib = [UINib nibWithNibName:tweetCountCellIdentifier bundle:nil];
-    [_tableView registerNib:tweetCountCellNib forCellReuseIdentifier:tweetCountCellIdentifier];
-    _tweetCountCell = [_tableView dequeueReusableCellWithIdentifier:tweetCountCellIdentifier];
-    [_tweetCountCell setRetweetCount:_tweet.retweetCount andFavoriteCount:_tweet.favoriteCount];
-
-    UINib *tweetActionCellNib = [UINib nibWithNibName:tweetActionCellIdentifier bundle:nil];
-    [_tableView registerNib:tweetActionCellNib forCellReuseIdentifier:tweetActionCellIdentifier];
-    _tweetActionCell = [_tableView dequeueReusableCellWithIdentifier:tweetActionCellIdentifier];
-    [_tweetActionCell setRetweeted:_tweet.retweeted];
-    [_tweetActionCell setFavorited:_tweet.favorited];
+    [self setupDetailsRow];
+    [self setupCountRow];
+    [self setupActionRow];
 }
 
-#pragma mark - UITableViewDataSource
+- (void)setupDetailsRow {
+    if (_tweet.retweetedLabelString) {
+        [_retweetedMarkImage setHidden:NO];
+        [_retweetedLabel setHidden:NO];
+        _retweetedLabel.text = _tweet.retweetedLabelString;
+        _profileImageTopConstraint.constant = 42;
+        _userNameTopConstraint.constant = 48;
+    } else {
+        [_retweetedMarkImage setHidden:YES];
+        [_retweetedLabel setHidden:YES];
+        _profileImageTopConstraint.constant = 12;
+        _userNameTopConstraint.constant = 18;
+    }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    _profileImageView.image = _profileImage;
+    _userNameLabel.text = _tweet.author.name;
+    _userScreenNameLabel.text = _tweet.author.screenNameString;
+    _tweetLabel.text = _tweet.tweetString;
+    _dateLabel.text = _tweet.createdAt.description;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-            return _tweetDetailCell;
-        case 1:
-            return _tweetCountCell;
-        case 2:
-            return _tweetActionCell;
-        case 3:
-            return [[UITableViewCell alloc] init];
-    }
-    return nil;
+- (void)setupCountRow {
+    _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.retweetCount];
+    _favoritesCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.favoriteCount];
 }
 
-#pragma mark - UITableViewDelegate
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        CGFloat height = _tweetDetailCell.tweetLabel.frame.size.height;
-        return height+124;
-    }
-    if (indexPath.row > 0 && indexPath.row < 3 )return 50;
-    if (indexPath.row == 3) {
-        CGFloat height = _tableView.frame.size.height - _tableView.contentSize.height;
-        return height;
-    }
-    return 0;
+- (void)setupActionRow {
+    [self setRetweetedState:_tweet.retweeted];
+    [self setFavoriteState:_tweet.favorited];
 }
 
 
 #pragma mark - button handlers
 
-- (void)homeButtonHandler:(id)sender {
-    
-}
-
 - (void)replyButtonHandler:(id)sender {
     
 }
+
+- (void)setRetweetedState:(BOOL)retweeted {
+    if (retweeted) {
+        _retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
+    } else {
+        _retweetImageView.image = [UIImage imageNamed:@"retweet"];
+    }
+}
+
+- (void)setFavoriteState:(BOOL)favorited {
+    if (favorited) {
+        _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
+    } else {
+        _favoriteImageView.image = [UIImage imageNamed:@"favorite"];
+    }
+}
+
 
 @end

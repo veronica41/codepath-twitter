@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
 
-@interface TweetViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TweetViewController : UIViewController
 
 @property (nonatomic, strong) Tweet *tweet;
 @property (nonatomic, strong) UIImage *profileImage;
