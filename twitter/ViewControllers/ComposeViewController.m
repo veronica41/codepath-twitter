@@ -62,6 +62,9 @@
     [_profileImageView setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
     _userNameLabel.text = user.name;
     _userScreenNameLabel.text = user.screenName;
+    if (_tweetType == TweetTypeReply) {
+        _tweetTextView.text = user.screenNameString;
+    }
     _tweetTextView.delegate = self;
     [_tweetTextView becomeFirstResponder];
 }
@@ -85,7 +88,9 @@
 
 - (void)tweetButtonHandler:(id)sender {
     NSString * status = _tweetTextView.text;
-    [[TwitterClient instance] postNewStatus:status success:^(AFHTTPRequestOperation *operation, id response) {
+    NSString * replyTo = nil;
+    if (_tweetType == TweetTypeReply) replyTo = _tweet.tweetID;
+    [[TwitterClient instance] postNewStatus:status withReplyToID:replyTo success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"post status response : %@", response);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.delegate createNewTweetWithStatus:status];

@@ -79,10 +79,14 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
 }
 
 - (void)postNewStatus:(NSString *)status
-                     success:(void (^)(AFHTTPRequestOperation *operation, id response))success
-                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+        withReplyToID:(NSString *)reply_to_id
+              success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     if (!status) return;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"status": status}];
+    if (reply_to_id) {
+        [params setObject:reply_to_id forKey:@"in_reply_to_status_id"];
+    }
     [self postPath:@"1.1/statuses/update.json" parameters:params success:success failure:failure];
 }
 

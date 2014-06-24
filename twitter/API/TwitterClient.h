@@ -19,6 +19,7 @@
 
 - (void)getStatusWithID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 - (void)postNewStatus:(NSString *)status
+        withReplyToID:(NSString *)reply_to_id
               success:(void (^)(AFHTTPRequestOperation *operation, id response))success
               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
