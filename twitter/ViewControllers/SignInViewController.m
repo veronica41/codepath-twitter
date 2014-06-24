@@ -49,4 +49,9 @@
                       otherButtonTitles:nil] show];
 
 }
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 @end

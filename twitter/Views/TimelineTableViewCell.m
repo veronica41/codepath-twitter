@@ -10,9 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 
 @interface TimelineTableViewCell ()
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tweeterLabelVerticalConstraint;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageTopConstraint;
 @end
 
 
@@ -21,10 +19,16 @@
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     if (tweet.retweetedLabelString) {
+        [_retweetedMarkImageView setHidden:NO];
+        [_retweetLabel setHidden:NO];
         _retweetLabel.text = tweet.retweetedLabelString;
+        _profileImageTopConstraint.constant = 35;
     } else {
-        [self removeRetweetedViews];
+        [_retweetedMarkImageView setHidden:YES];
+        [_retweetLabel setHidden:YES];
+        _profileImageTopConstraint.constant = 12;
     }
+
     [_profileImage setImageWithURL:[NSURL URLWithString:tweet.author.profileImageUrl]];
     _userNameLabel.text = tweet.author.name;
     _userScreenNameLabel.text = tweet.author.screenNameString;
@@ -42,18 +46,6 @@
     [super layoutSubviews];
     _tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
     [super layoutSubviews];
-}
-
-- (void)removeRetweetedViews {
-    [_retweetedMarkImageView removeFromSuperview];
-    [_retweetLabel removeFromSuperview];
-    if (_tweeterLabelVerticalConstraint) {
-       [self.contentView removeConstraint:_tweeterLabelVerticalConstraint];
-    }
-    NSDictionary *views = NSDictionaryOfVariableBindings(_profileImage, _tweetLabel, _userNameLabel, _replyImageView);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(12)-[_profileImage]" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(35)-[_tweetLabel]" options:0 metrics:nil views:views]];
-    [_tweetLabel layoutSubviews];
 }
 
 @end

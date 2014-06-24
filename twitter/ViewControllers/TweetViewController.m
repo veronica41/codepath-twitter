@@ -70,7 +70,7 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -81,6 +81,8 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
             return _tweetCountCell;
         case 2:
             return _tweetActionCell;
+        case 3:
+            return [[UITableViewCell alloc] init];
     }
     return nil;
 }
@@ -93,7 +95,12 @@ static NSString * tweetActionCellIdentifier = @"TweetActionCell";
         CGFloat height = _tweetDetailCell.tweetLabel.frame.size.height;
         return height+124;
     }
-    return 50;
+    if (indexPath.row > 0 && indexPath.row < 3 )return 50;
+    if (indexPath.row == 3) {
+        CGFloat height = _tableView.frame.size.height - _tableView.contentSize.height;
+        return height;
+    }
+    return 0;
 }
 
 
