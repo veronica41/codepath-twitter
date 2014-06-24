@@ -18,5 +18,21 @@
     return twitterBlueColor;
 }
 
++ (UIColor *)twitterLightestGreyColor {
+    static UIColor *twitterLightestGreyColor = nil;
+    if (!twitterLightestGreyColor){
+        twitterLightestGreyColor = [UIColor colorWithRed:245/255.0 green:248/255.0 blue:250/255.0 alpha:1.0];
+    }
+    return twitterLightestGreyColor;
+}
+
++ (UIColor *)twitterGreyColor {
+    static UIColor *twitterGreyColor = nil;
+    if (!twitterGreyColor){
+        twitterGreyColor = [UIColor colorWithRed:204/255.0 green:214/255.0 blue:221/255.0 alpha:1.0];
+    }
+    return twitterGreyColor;
+}
+
 
 @end

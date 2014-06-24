@@ -11,5 +11,7 @@
 @interface UIColor (Twitter)
 
 + (UIColor *)twitterBlueColor;
++ (UIColor *)twitterLightestGreyColor;
++ (UIColor *)twitterGreyColor;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "TweetViewController.h"
+#import "ComposeViewController.h"
 
 @interface TweetViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImage;
@@ -88,7 +89,9 @@
 #pragma mark - button handlers
 
 - (void)replyButtonHandler:(id)sender {
-    
+    ComposeViewController * controller = [[ComposeViewController alloc] initWithTweet:_tweet];
+    [self.navigationController pushViewController:controller animated:YES];
+    [self.navigationController.view clipsToBounds];
 }
 
 - (void)setRetweetedState:(BOOL)retweeted {

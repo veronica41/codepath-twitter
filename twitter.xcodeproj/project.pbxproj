@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		965D7B0A1957FD6A00CC00EC /* TweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965D7B081957FD6A00CC00EC /* TweetViewController.m */; };
 		965D7B0B1957FD6A00CC00EC /* TweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965D7B091957FD6A00CC00EC /* TweetViewController.xib */; };
+		96A874C9195965090093145A /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A874C7195965090093145A /* ComposeViewController.m */; };
+		96A874CA195965090093145A /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A874C8195965090093145A /* ComposeViewController.xib */; };
 		96B855451956665E00552A01 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855441956665E00552A01 /* Foundation.framework */; };
 		96B855471956665E00552A01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855461956665E00552A01 /* CoreGraphics.framework */; };
 		96B855491956665E00552A01 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B855481956665E00552A01 /* UIKit.framework */; };
@@ -50,6 +52,9 @@
 		965D7B071957FD6A00CC00EC /* TweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetViewController.h; path = ViewControllers/TweetViewController.h; sourceTree = "<group>"; };
 		965D7B081957FD6A00CC00EC /* TweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetViewController.m; path = ViewControllers/TweetViewController.m; sourceTree = "<group>"; };
 		965D7B091957FD6A00CC00EC /* TweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetViewController.xib; path = ViewControllers/TweetViewController.xib; sourceTree = "<group>"; };
+		96A874C6195965090093145A /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComposeViewController.h; path = ViewControllers/ComposeViewController.h; sourceTree = "<group>"; };
+		96A874C7195965090093145A /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComposeViewController.m; path = ViewControllers/ComposeViewController.m; sourceTree = "<group>"; };
+		96A874C8195965090093145A /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ComposeViewController.xib; path = ViewControllers/ComposeViewController.xib; sourceTree = "<group>"; };
 		96B855411956665E00552A01 /* twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B855441956665E00552A01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		96B855461956665E00552A01 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -233,6 +238,9 @@
 				965D7B071957FD6A00CC00EC /* TweetViewController.h */,
 				965D7B081957FD6A00CC00EC /* TweetViewController.m */,
 				965D7B091957FD6A00CC00EC /* TweetViewController.xib */,
+				96A874C6195965090093145A /* ComposeViewController.h */,
+				96A874C7195965090093145A /* ComposeViewController.m */,
+				96A874C8195965090093145A /* ComposeViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -328,6 +336,7 @@
 				965D7B0B1957FD6A00CC00EC /* TweetViewController.xib in Resources */,
 				96B8554F1956665E00552A01 /* InfoPlist.strings in Resources */,
 				96B85581195693E600552A01 /* SignInViewController.xib in Resources */,
+				96A874CA195965090093145A /* ComposeViewController.xib in Resources */,
 				96B855571956665E00552A01 /* Images.xcassets in Resources */,
 				96B8558D1956C08100552A01 /* TimelineViewController.xib in Resources */,
 			);
@@ -389,6 +398,7 @@
 				96B855901956D44D00552A01 /* Tweet.m in Sources */,
 				96B855941956EBD800552A01 /* TimelineTableViewCell.m in Sources */,
 				96B855881956A6EF00552A01 /* User.m in Sources */,
+				96A874C9195965090093145A /* ComposeViewController.m in Sources */,
 				96B855511956665E00552A01 /* main.m in Sources */,
 				965D7B0A1957FD6A00CC00EC /* TweetViewController.m in Sources */,
 			);
