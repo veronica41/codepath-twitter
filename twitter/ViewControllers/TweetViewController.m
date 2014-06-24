@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userNameTopConstraint;
 
+@property (nonatomic) BOOL retweeted;
+@property (nonatomic) BOOL favorited;
+
 @end
 
 
@@ -35,6 +38,8 @@
     if (self) {
         _tweet = tweet;
         _profileImage = profileImage;
+        _retweeted = _tweet.retweeted;
+        _favorited = _tweet.favorited;
     }
     return self;
 }
@@ -83,6 +88,22 @@
 - (void)setupActionRow {
     [self setRetweetedState:_tweet.retweeted];
     [self setFavoriteState:_tweet.favorited];
+
+    UITapGestureRecognizer *replyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(replyButtonHandler:)];
+    replyTap.numberOfTapsRequired = 1;
+    _replyImageView.userInteractionEnabled = YES;
+    [_replyImageView addGestureRecognizer:replyTap];
+
+    UITapGestureRecognizer *retweetTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(retweetButtonHandler:)];
+    retweetTap.numberOfTapsRequired = 1;
+    _retweetImageView.userInteractionEnabled = YES;
+    [_retweetImageView addGestureRecognizer:retweetTap];
+
+    UITapGestureRecognizer *favoriteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(favoriteButtonHandler:)];
+    favoriteTap.numberOfTapsRequired = 1;
+    _favoriteImageView.userInteractionEnabled = YES;
+    [_favoriteImageView addGestureRecognizer:favoriteTap];
+
 }
 
 
@@ -92,6 +113,26 @@
     ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeReply Tweet:_tweet];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];
+}
+
+- (void)retweetButtonHandler:(id)sender {
+    _retweeted = !_retweeted;
+    [self setRetweetedState:_retweeted];
+    if (_retweeted) {
+        _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.retweetCount+1];
+    } else {
+        _retweetCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.retweetCount];
+    }
+}
+
+- (void)favoriteButtonHandler:(id)sender {
+    _favorited = !_favorited;
+    [self setFavoriteState:_favorited];
+    if (_favorited) {
+        _favoritesCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.favoriteCount+1];
+    } else {
+        _favoritesCountLabel.text = [NSString stringWithFormat:@"%ld", _tweet.favoriteCount];
+    }
 }
 
 - (void)setRetweetedState:(BOOL)retweeted {
