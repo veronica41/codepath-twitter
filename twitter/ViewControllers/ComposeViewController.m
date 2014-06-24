@@ -19,10 +19,9 @@
 
 @implementation ComposeViewController
 
-- (id)initWithTweet:(Tweet *)tweet {
+- (id)init {
     self = [super init];
     if (self) {
-        _tweet = tweet;
         _characterCount = 140;
     }
     return self;
@@ -35,9 +34,9 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor twitterLightestGreyColor]];
     [self.navigationController.navigationBar setTintColor:[UIColor twitterBlueColor]];
 
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonHandler:)];
     UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(tweetButtonHandler:)];
-    self.navigationItem.backBarButtonItem = cancelButton;
+    self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.rightBarButtonItem = tweetButton;
 
     _characterCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(228, 15, 60, 14)];
@@ -50,6 +49,10 @@
 }
 
 #pragma mark - button handlers
+
+- (void)cancelButtonHandler:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)tweetButtonHandler:(id)sender {
 

@@ -7,6 +7,7 @@
 //
 
 #import "TimelineViewController.h"
+#import "ComposeViewController.h"
 #import "TwitterClient.h"
 #import "User.h"
 #import "Tweet.h"
@@ -117,6 +118,8 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (void)newButtonHandler:(id)sender {
-    
+    ComposeViewController * controller = [[ComposeViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 @end
