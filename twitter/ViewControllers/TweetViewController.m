@@ -75,9 +75,9 @@
     }
 
     _profileImageView.image = _profileImage;
-    _userNameLabel.text = _tweet.author.name;
-    _userScreenNameLabel.text = _tweet.author.screenNameString;
-    _tweetLabel.text = _tweet.tweetString;
+   // _userNameLabel.text = _tweet.author.name;
+   // _userScreenNameLabel.text = _tweet.author.screenNameString;
+   // _tweetLabel.text = _tweet.tweetString;
     _dateLabel.text = _tweet.createdAt.description;
 }
 

@@ -8,9 +8,26 @@
 
 #import "TimelineTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSDate+DateTools.h"
+
+NSInteger const kProfileImageTopConstraintWithRetweet = 35;
+NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
 
 @interface TimelineTableViewCell ()
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageTopConstraint;
+
+@property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImageView;
+@property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userScreenNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
+
 @end
 
 
@@ -26,47 +43,54 @@
 
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
-    if (tweet.retweetedLabelString) {
-        [_retweetedMarkImageView setHidden:NO];
-        [_retweetLabel setHidden:NO];
-        _retweetLabel.text = tweet.retweetedLabelString;
-        _profileImageTopConstraint.constant = 35;
+
+    self.profileImage.image = nil;
+
+    Tweet *originalTweet;
+    if (tweet.retweetedTweet) {
+        originalTweet = tweet.retweetedTweet;
+        [self.retweetedMarkImageView setHidden:NO];
+        [self.retweetLabel setHidden:NO];
+        self.retweetLabel.text = tweet.retweetedLabelString;
+        self.profileImageTopConstraint.constant = kProfileImageTopConstraintWithRetweet;
     } else {
-        [_retweetedMarkImageView setHidden:YES];
-        [_retweetLabel setHidden:YES];
-        _profileImageTopConstraint.constant = 12;
+        originalTweet = tweet;
+        [self.retweetedMarkImageView setHidden:YES];
+        [self.retweetLabel setHidden:YES];
+        self.profileImageTopConstraint.constant = kProfileImageTopConstraintWithoutRetweet;
     }
 
-    [_profileImage setImageWithURL:[NSURL URLWithString:tweet.author.profileImageUrl]];
-    _userNameLabel.text = tweet.author.name;
-    _userScreenNameLabel.text = tweet.author.screenNameString;
-    _dateLabel.text = tweet.timeAgoString;
-    _tweetLabel.text = tweet.tweetString;
+    [self.profileImage setImageWithURL:originalTweet.user.profileImageUrl];
+    self.userNameLabel.text = originalTweet.user.name;
+    self.userScreenNameLabel.text = originalTweet.user.screenNameString;
+    self.dateLabel.text = originalTweet.createdAt.shortTimeAgoSinceNow;
+    self.tweetLabel.text = originalTweet.text;
+
     [self setRetweeted:tweet.retweeted];
     [self setFavorited:tweet.favorited];
 }
 
 - (void)setRetweeted:(BOOL)retweeted {
-    _tweet.retweeted = retweeted;
+    self.tweet.retweeted = retweeted;
     if (retweeted) {
-        _retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
+        self.retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
     } else {
-        _retweetImageView.image = [UIImage imageNamed:@"retweet"];
+        self.retweetImageView.image = [UIImage imageNamed:@"retweet"];
     }
 }
 
 - (void)setFavorited:(BOOL)favorited {
-    _tweet.favorited = favorited;
+    self.tweet.favorited = favorited;
     if (favorited) {
-        _favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
+        self.favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
     } else {
-        _favoriteImageView.image = [UIImage imageNamed:@"favorite"];
+        self.favoriteImageView.image = [UIImage imageNamed:@"favorite"];
     }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
+    self.tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
     [super layoutSubviews];
 }
 

@@ -59,7 +59,7 @@
     [self.navigationController.navigationBar addSubview:_characterCountLabel];
 
     User *user = [User currentUser];
-    [_profileImageView setImageWithURL:[NSURL URLWithString:user.profileImageUrl]];
+    [_profileImageView setImageWithURL:user.profileImageUrl];
     _userNameLabel.text = user.name;
     _userScreenNameLabel.text = user.screenName;
     if (_tweetType == TweetTypeReply) {

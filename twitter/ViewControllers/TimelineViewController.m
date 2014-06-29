@@ -12,6 +12,7 @@
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
 #import "MBProgressHUD.h"
+#import "SVPullToRefresh.h"
 
 static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
@@ -20,7 +21,6 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -47,46 +47,71 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     self.navigationItem.rightBarButtonItem = newButton;
 
     // setup the table view
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     UINib *timelineCellNib = [UINib nibWithNibName:timelineCellIdentifier bundle:nil];
-    [_tableView registerNib:timelineCellNib forCellReuseIdentifier:timelineCellIdentifier];
-    _prototypeCell = [_tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier];
-    [self reload];
+    [self.tableView registerNib:timelineCellNib forCellReuseIdentifier:timelineCellIdentifier];
+    self.prototypeCell = [_tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier];
 
-    // setup refresh control
-    _refreshControl = [[UIRefreshControl alloc] init];
-    [_refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
-    [_tableView addSubview:_refreshControl];
+    __weak TimelineViewController *weakSelf = self;
+
+    // setup pull to refresh
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf loadNewTweetsWithCompletionHandler:^{
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+        }];
+    }];
+
+    // setup infinite scroll
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMoreTweetsWithCompletionHandler:^{
+            [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        }];
+    }];
+
+    // load initial tweets
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self loadInitialTweetsWithCompletionHandler:^{
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+    }];
 }
 
-- (void)reload {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+#pragma mark - Load tweets
+
+- (void)loadInitialTweetsWithCompletionHandler:(void(^)(void))completionhandler {
+    __weak TimelineViewController *weakSelf = self;
+
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _tweets = [[Tweet tweetsFromJSONArray:response] mutableCopy];
-            [_tableView reloadData];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [_refreshControl endRefreshing];
+            weakSelf.tweets = [[Tweet tweetsFromJSONArray:response] mutableCopy];
+            [weakSelf.tableView reloadData];
+            completionhandler();
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"home timeline request error: %@", error);
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [_refreshControl endRefreshing];
+            NSLog(@"home timeline request error: %@", error);
+            completionhandler();
         });
     }];
+}
+
+- (void)loadNewTweetsWithCompletionHandler:(void(^)(void))completionHandler {
+    
+}
+
+- (void)loadMoreTweetsWithCompletionHandler:(void(^)(void))completionHandler {
+    
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _tweets.count;
+    return self.tweets.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
-    cell.tweet = _tweets[indexPath.row];
+    cell.tweet = self.tweets[indexPath.row];
     return cell;
 }
 
@@ -97,8 +122,8 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    _prototypeCell.tweet = _tweets[indexPath.row];
-    CGSize size = [_prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    self.prototypeCell.tweet = self.tweets[indexPath.row];
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size.height+1;
 }
 
@@ -107,7 +132,8 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     // and try to retweet or favorite from there !!!
 
     TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:_tweets[indexPath.row] andProfileImage:cell.profileImage.image];
+    TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:self.tweets[indexPath.row] andProfileImage:nil];
+                                             //cell.profileImage.image];
     tweetController.delegate = self;
     [self.navigationController pushViewController:tweetController animated:YES];
     [self.navigationController.view clipsToBounds];
@@ -120,8 +146,8 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     Tweet *tweet = [[Tweet alloc] init];
     tweet.user = user;
     tweet.text = status;
-    [_tweets insertObject:tweet atIndex:0];
-    [_tableView reloadData];
+    [self.tweets insertObject:tweet atIndex:0];
+    [self.tableView reloadData];
 }
 
 #pragma mark - TweetViewControllerDelegate

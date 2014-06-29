@@ -13,17 +13,6 @@
 
 @property (nonatomic, strong) Tweet *tweet;
 
-@property (weak, nonatomic) IBOutlet UIImageView *retweetedMarkImageView;
-@property (weak, nonatomic) IBOutlet UILabel *retweetLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userScreenNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
-
 - (void)setRetweeted:(BOOL)retweeted;
 - (void)setFavorited:(BOOL)favorited;
 

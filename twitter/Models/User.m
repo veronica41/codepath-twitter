@@ -48,16 +48,13 @@ static User *_currentUser = nil;
 }
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{@"name": @"name",
-             @"screenName" : @"screen_name",
+    return @{@"screenName" : @"screen_name",
              @"profileImageUrl" : @"profile_image_url"
              };
 }
 
-+ (NSValueTransformer *)profileImageUrlSONTransformer {
-    return [NSValueTransformer valueTransformerForName:^(NSString *urlString) {
-        return [NSURL URLWithString:urlString];
-    }];
++ (NSValueTransformer *)profileImageUrlJSONTransformer {
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
 - (NSString *)screenNameString {
