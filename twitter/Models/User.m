@@ -11,27 +11,17 @@
 
 NSString * const UserDidLoginNotification = @"UserDidLoginNotification";
 NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
-NSString * const currentUserKey = @"CurrentUserKey";
+NSString * const kCurrentUserKey = @"CurrentUserKey";
 
 @implementation User
 
-static User *_currentUser;
+static User *_currentUser = nil;
 
 + (User *)currentUser {
     if (!_currentUser) {
-        NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:currentUserKey];
+        NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:kCurrentUserKey];
         if (data) {
-            NSError * error = nil;
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-            if (error) {
-                NSLog(@"Error parsing JSON: %@", error);
-            } else {
-                error = nil;
-                _currentUser = [MTLJSONAdapter modelOfClass:User.class fromJSONDictionary:dict error:&error];
-                if (error) {
-                     NSLog(@"Error: %@", error);
-                }
-            }
+            _currentUser = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         }
     }
     return _currentUser;
@@ -39,15 +29,10 @@ static User *_currentUser;
 
 + (void)setCurrentUser:(User *)currentUser {
     if (currentUser) {
-        NSError * error = nil;
-        NSData *data = [NSJSONSerialization dataWithJSONObject:[MTLJSONAdapter JSONDictionaryFromModel:currentUser] options:NSJSONWritingPrettyPrinted error:&error];
-        if (error) {
-             NSLog(@"Error parsing JSON: %@", error);
-        } else {
-            [[NSUserDefaults standardUserDefaults] setObject:data forKey:currentUserKey];
-        }
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:currentUser];
+        [[NSUserDefaults standardUserDefaults] setObject:data forKey:kCurrentUserKey];
     } else {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:currentUserKey];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kCurrentUserKey];
         [TwitterClient instance].accessToken = nil;
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -70,7 +55,9 @@ static User *_currentUser;
 }
 
 + (NSValueTransformer *)profileImageUrlSONTransformer {
-    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+    return [NSValueTransformer valueTransformerForName:^(NSString *urlString) {
+        return [NSURL URLWithString:urlString];
+    }];
 }
 
 - (NSString *)screenNameString {
