@@ -40,7 +40,9 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification object:nil userInfo:[NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey]];
+    NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification
+                                                                 object:nil
+                                                               userInfo:[NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey]];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     
     return YES;
@@ -91,11 +93,10 @@
 }
 
 - (UINavigationController *)navigationController {
-    if (!_navigationController) {
-        TimelineViewController * controller = [[TimelineViewController alloc] init];
-        _navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-        _navigationController.navigationBar.translucent = NO;
-    }
+    TimelineViewController * controller = [[TimelineViewController alloc] init];
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    _navigationController.navigationBar.translucent = NO;
     return _navigationController;
 }
+
 @end

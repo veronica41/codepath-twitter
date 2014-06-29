@@ -14,10 +14,10 @@
 
 @interface SignInViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *signinButton;
 - (IBAction)signinButtonHandler:(id)sender;
 
 @end
+
 
 @implementation SignInViewController
 
