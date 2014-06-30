@@ -13,6 +13,7 @@
 #import "TimelineTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "SVPullToRefresh.h"
+#import "DrawerViewController.h"
 
 static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
@@ -40,10 +41,10 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     [super viewDidLoad];
 
     // setup the navigation bar
-    UIBarButtonItem *signOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(signOutButtonHandler:)];
-    UIBarButtonItem *newButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(newButtonHandler:)];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"hamburger"] style:UIBarButtonItemStylePlain target:self action:@selector(onMenuButton:)];
+    UIBarButtonItem *newButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"compose"] style:UIBarButtonItemStylePlain target:self action:@selector(onNewButton:)];
     self.navigationItem.title = @"Home";
-    self.navigationItem.leftBarButtonItem = signOutButton;
+    self.navigationItem.leftBarButtonItem = menuButton;
     self.navigationItem.rightBarButtonItem = newButton;
 
     // setup the table view
@@ -114,8 +115,6 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
                 [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
             }
             [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-            [weakSelf.tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            
             completionHandler();
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -168,11 +167,16 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 #pragma mark - Button handlers
 
+- (void)onMenuButton:(id)sender {
+}
+
+/*
 - (void)signOutButtonHandler:(id)sender {
     [User setCurrentUser:nil];
 }
+*/
 
-- (void)newButtonHandler:(id)sender {
+- (void)onNewButton:(id)sender {
     ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeNew];
     controller.delegate = self;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
