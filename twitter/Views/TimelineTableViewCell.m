@@ -72,6 +72,12 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
     self.favoriteImageView.delegate = self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
+    [super layoutSubviews];
+}
+
 #pragma mark - RetweetImageViewDelegate
 
 - (void)retweetedStateChanged:(Tweet *)tweet {
@@ -98,12 +104,6 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
 
 - (void)favoritedStateDidChangeForTweet:(Tweet *)tweet {
     [self.favoriteImageView setTweet:tweet];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.tweetLabel.preferredMaxLayoutWidth = self.frame.size.width - 76;
-    [super layoutSubviews];
 }
 
 @end

@@ -128,8 +128,6 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: we will get into trouble if the user click the newly created status, go to the tweet detail view,
-    // and try to retweet or favorite from there !!!
     TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:cell.tweet];
     tweetController.delegate = cell;
@@ -139,11 +137,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 #pragma mark - ComposeViewControllerDelegate
 
-- (void)createNewTweetWithStatus:(NSString *)status {
-    User *user = [User currentUser];
-    Tweet *tweet = [[Tweet alloc] init];
-    tweet.user = user;
-    tweet.text = status;
+- (void)didPostTweet:(Tweet *)tweet {
     [self.tweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
 }
@@ -155,7 +149,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (void)newButtonHandler:(id)sender {
-    ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeNew Tweet:nil];
+    ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeNew];
     controller.delegate = self;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];

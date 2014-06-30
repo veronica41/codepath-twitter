@@ -135,7 +135,8 @@
 #pragma mark - button handlers
 
 - (void)replyButtonHandler:(id)sender {
-    ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeReply Tweet:self.tweet];
+    ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeReply];
+    controller.replyToTweet = self.tweet;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];
 }

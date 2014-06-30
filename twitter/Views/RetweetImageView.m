@@ -21,17 +21,18 @@
 
 @implementation RetweetImageView
 
-- (void)awakeFromNib {
-    UITapGestureRecognizer *retweetTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRetweet:)];
-    retweetTap.numberOfTapsRequired = 1;
-    self.userInteractionEnabled = YES;
-    [self addGestureRecognizer:retweetTap];
-}
-
 - (void)setTweet:(Tweet *)tweet {
     _tweet = tweet;
     self.oldRetweeted = tweet.retweeted;
     [self setRetweeted:tweet.retweeted];
+
+    // do not allow retweet the tweet the user created
+    if (![self.tweet.user.screenName isEqualToString:[User currentUser].screenName]) {
+        UITapGestureRecognizer *retweetTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onRetweet:)];
+        retweetTap.numberOfTapsRequired = 1;
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:retweetTap];
+    }
 }
 
 - (void)setRetweeted:(BOOL)retweeted {

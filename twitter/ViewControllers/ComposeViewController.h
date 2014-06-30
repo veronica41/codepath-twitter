@@ -16,7 +16,7 @@ typedef enum {
 
 @protocol ComposeViewControllerDelegate <NSObject>
 
-- (void)createNewTweetWithStatus:(NSString *)status;
+- (void)didPostTweet:(Tweet *)tweet;
 
 @end
 
@@ -24,9 +24,9 @@ typedef enum {
 @interface ComposeViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic) TweetType tweetType;
-@property (nonatomic, strong) Tweet *tweet;
+@property (nonatomic, strong) Tweet *replyToTweet;
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 
-- (id)initWithTweetType:(TweetType)type  Tweet:(Tweet *)tweet;
+- (id)initWithTweetType:(TweetType)type;
 
 @end
