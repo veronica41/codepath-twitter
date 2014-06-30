@@ -8,21 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "RetweetImageView.h"
+#import "FavoriteImageView.h"
 
 @protocol TweetViewControllerDelegate <NSObject>
 
-- (void)retweetedStateChanged:(Tweet *)tweet;
-- (void)favoritedStateChanged:(Tweet *)tweet;
+- (void)retweetedStateDidChangeForTweet:(Tweet *)tweet;
+- (void)favoritedStateDidChangeForTweet:(Tweet *)tweet;
 
 @end
 
 
-@interface TweetViewController : UIViewController
+@interface TweetViewController : UIViewController <RetweetImageViewDelegate, FavoriteImageViewDelegate>
 
 @property (nonatomic, weak) id<TweetViewControllerDelegate> delegate;
 @property (nonatomic, strong) Tweet *tweet;
-@property (nonatomic, strong) UIImage *profileImage;
 
-- (id)initWithTweet:(Tweet *)tweet andProfileImage:(UIImage *)profileImage;
+- (id)initWithTweet:(Tweet *)tweet;
 
 @end

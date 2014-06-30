@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96378C0D1960E6A100C9D024 /* RetweetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378C0C1960E6A100C9D024 /* RetweetImageView.m */; };
+		96378C101960E6B600C9D024 /* FavoriteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96378C0F1960E6B600C9D024 /* FavoriteImageView.m */; };
 		965D7B0A1957FD6A00CC00EC /* TweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 965D7B081957FD6A00CC00EC /* TweetViewController.m */; };
 		965D7B0B1957FD6A00CC00EC /* TweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965D7B091957FD6A00CC00EC /* TweetViewController.xib */; };
 		96A874C9195965090093145A /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A874C7195965090093145A /* ComposeViewController.m */; };
@@ -49,6 +51,10 @@
 
 /* Begin PBXFileReference section */
 		6B3C60C19BF4478CA2E5A4BC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		96378C0B1960E6A100C9D024 /* RetweetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RetweetImageView.h; path = Views/RetweetImageView.h; sourceTree = "<group>"; };
+		96378C0C1960E6A100C9D024 /* RetweetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RetweetImageView.m; path = Views/RetweetImageView.m; sourceTree = "<group>"; };
+		96378C0E1960E6B600C9D024 /* FavoriteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteImageView.h; path = Views/FavoriteImageView.h; sourceTree = "<group>"; };
+		96378C0F1960E6B600C9D024 /* FavoriteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteImageView.m; path = Views/FavoriteImageView.m; sourceTree = "<group>"; };
 		965D7B071957FD6A00CC00EC /* TweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweetViewController.h; path = ViewControllers/TweetViewController.h; sourceTree = "<group>"; };
 		965D7B081957FD6A00CC00EC /* TweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TweetViewController.m; path = ViewControllers/TweetViewController.m; sourceTree = "<group>"; };
 		965D7B091957FD6A00CC00EC /* TweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TweetViewController.xib; path = ViewControllers/TweetViewController.xib; sourceTree = "<group>"; };
@@ -222,6 +228,10 @@
 				96B855911956EBD800552A01 /* TimelineTableViewCell.h */,
 				96B855921956EBD800552A01 /* TimelineTableViewCell.m */,
 				96B855931956EBD800552A01 /* TimelineTableViewCell.xib */,
+				96378C0B1960E6A100C9D024 /* RetweetImageView.h */,
+				96378C0C1960E6A100C9D024 /* RetweetImageView.m */,
+				96378C0E1960E6B600C9D024 /* FavoriteImageView.h */,
+				96378C0F1960E6B600C9D024 /* FavoriteImageView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -395,8 +405,10 @@
 				96B8557A1956766500552A01 /* TwitterClient.m in Sources */,
 				96B8558C1956C08100552A01 /* TimelineViewController.m in Sources */,
 				96B85580195693E600552A01 /* SignInViewController.m in Sources */,
+				96378C101960E6B600C9D024 /* FavoriteImageView.m in Sources */,
 				96B855901956D44D00552A01 /* Tweet.m in Sources */,
 				96B855941956EBD800552A01 /* TimelineTableViewCell.m in Sources */,
+				96378C0D1960E6A100C9D024 /* RetweetImageView.m in Sources */,
 				96B855881956A6EF00552A01 /* User.m in Sources */,
 				96A874C9195965090093145A /* ComposeViewController.m in Sources */,
 				96B855511956665E00552A01 /* main.m in Sources */,

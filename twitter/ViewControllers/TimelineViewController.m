@@ -130,11 +130,9 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: we will get into trouble if the user click the newly created status, go to the tweet detail view,
     // and try to retweet or favorite from there !!!
-
     TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:self.tweets[indexPath.row] andProfileImage:nil];
-                                             //cell.profileImage.image];
-    tweetController.delegate = self;
+    TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:cell.tweet];
+    tweetController.delegate = cell;
     [self.navigationController pushViewController:tweetController animated:YES];
     [self.navigationController.view clipsToBounds];
 }
@@ -148,30 +146,6 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     tweet.text = status;
     [self.tweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
-}
-
-#pragma mark - TweetViewControllerDelegate
-
-- (void)retweetedStateChanged:(Tweet *)tweet {
-    [_tweets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Tweet *t = (Tweet *)obj;
-        if ([t.tweetID isEqualToString:tweet.tweetID]) {
-            t.retweeted = tweet.retweeted;
-            [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            *stop = YES;
-        }
-    }];
-}
-
-- (void)favoritedStateChanged:(Tweet *)tweet {
-    [_tweets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Tweet *t = (Tweet *)obj;
-        if ([t.tweetID isEqualToString:tweet.tweetID]) {
-            t.favorited = tweet.favorited;
-            [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            *stop = YES;
-        }
-    }];
 }
 
 #pragma mark - Button handlers

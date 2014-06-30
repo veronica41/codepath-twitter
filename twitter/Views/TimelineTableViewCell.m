@@ -25,8 +25,8 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *retweetImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *favoriteImageView;
+@property (weak, nonatomic) IBOutlet RetweetImageView *retweetImageView;
+@property (weak, nonatomic) IBOutlet FavoriteImageView *favoriteImageView;
 
 @end
 
@@ -66,26 +66,38 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
     self.dateLabel.text = originalTweet.createdAt.shortTimeAgoSinceNow;
     self.tweetLabel.text = originalTweet.text;
 
-    [self setRetweeted:tweet.retweeted];
-    [self setFavorited:tweet.favorited];
+    [self.retweetImageView setTweet:tweet];
+    self.retweetImageView.delegate = self;
+    [self.favoriteImageView setTweet:tweet];
+    self.favoriteImageView.delegate = self;
 }
 
-- (void)setRetweeted:(BOOL)retweeted {
-    self.tweet.retweeted = retweeted;
-    if (retweeted) {
-        self.retweetImageView.image = [UIImage imageNamed:@"retweet_on"];
-    } else {
-        self.retweetImageView.image = [UIImage imageNamed:@"retweet"];
-    }
+#pragma mark - RetweetImageViewDelegate
+
+- (void)retweetedStateChanged:(Tweet *)tweet {
+    __weak TimelineTableViewCell *weakSelf = self;
+    [self.retweetImageView postRetweetedWithCompletionHandler:^(Tweet *tweet, NSError *error) {
+        if (tweet) weakSelf.tweet = tweet;
+    }];
 }
 
-- (void)setFavorited:(BOOL)favorited {
-    self.tweet.favorited = favorited;
-    if (favorited) {
-        self.favoriteImageView.image = [UIImage imageNamed:@"favorite_on"];
-    } else {
-        self.favoriteImageView.image = [UIImage imageNamed:@"favorite"];
-    }
+#pragma mark - FavoriteImageViewDelegate
+
+- (void)favoritedStateChanged:(Tweet *)tweet {
+    __weak TimelineTableViewCell *weakSelf = self;
+    [self.favoriteImageView postFavoritedWithCompletionHandler:^(Tweet *tweet, NSError *error) {
+        if (tweet) weakSelf.tweet = tweet;
+    }];
+}
+
+#pragma mark - TweetViewControllerDelegate
+
+- (void)retweetedStateDidChangeForTweet:(Tweet *)tweet {
+    [self.retweetImageView setTweet:tweet];
+}
+
+- (void)favoritedStateDidChangeForTweet:(Tweet *)tweet {
+    [self.favoriteImageView setTweet:tweet];
 }
 
 - (void)layoutSubviews {

@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "RetweetImageView.h"
+#import "FavoriteImageView.h"
+#import "TweetViewController.h"
 
-@interface TimelineTableViewCell : UITableViewCell
+@interface TimelineTableViewCell : UITableViewCell <RetweetImageViewDelegate, FavoriteImageViewDelegate, TweetViewControllerDelegate>
 
 @property (nonatomic, strong) Tweet *tweet;
-
-- (void)setRetweeted:(BOOL)retweeted;
-- (void)setFavorited:(BOOL)favorited;
 
 @end
