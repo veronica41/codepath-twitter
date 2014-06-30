@@ -19,7 +19,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 @interface TimelineViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *tweets;
+@property (nonatomic, strong) NSArray *tweets;
 @property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
 
 @end
@@ -57,7 +57,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
     // setup pull to refresh
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf loadNewTweetsWithCompletionHandler:^{
+        [weakSelf loadTweetsWithCompletionHandler:^{
             [weakSelf.tableView.pullToRefreshView stopAnimating];
         }];
     }];
@@ -71,36 +71,59 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
     // load initial tweets
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self loadInitialTweetsWithCompletionHandler:^{
+    [self loadTweetsWithCompletionHandler:^{
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     }];
 }
 
 #pragma mark - Load tweets
 
-- (void)loadInitialTweetsWithCompletionHandler:(void(^)(void))completionhandler {
+- (void)loadTweetsWithCompletionHandler:(void(^)(void))completionHandler {
     __weak TimelineViewController *weakSelf = self;
 
-    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:nil maxId:nil success:^(AFHTTPRequestOperation *operation, id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.tweets = [[Tweet tweetsFromJSONArray:response] mutableCopy];
             [weakSelf.tableView reloadData];
-            completionhandler();
+            completionHandler();
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"home timeline request error: %@", error);
-            completionhandler();
+            completionHandler();
         });
     }];
 }
 
-- (void)loadNewTweetsWithCompletionHandler:(void(^)(void))completionHandler {
-    
-}
-
 - (void)loadMoreTweetsWithCompletionHandler:(void(^)(void))completionHandler {
-    
+    __weak TimelineViewController *weakSelf = self;
+    NSString * lastTweetID= ((Tweet *)[self.tweets lastObject]).tweetID;
+    long long maxID = [lastTweetID longLongValue] - 1;
+
+    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:nil maxId:[@(maxID) stringValue] success:^(AFHTTPRequestOperation *operation, id response) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *newTweets = [Tweet tweetsFromJSONArray:response];
+            NSInteger oldTweetsCount = weakSelf.tweets.count;
+            if (newTweets.count > 0) {
+                weakSelf.tweets = [weakSelf.tweets arrayByAddingObjectsFromArray:newTweets];
+            }
+
+            // insert new rows
+            NSMutableArray *indexPaths = [NSMutableArray array];
+            for (NSInteger i = oldTweetsCount; i < weakSelf.tweets.count; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+            [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            [weakSelf.tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+            completionHandler();
+        });
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"home timeline request error: %@", error);
+            completionHandler();
+        });
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -138,7 +161,8 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 #pragma mark - ComposeViewControllerDelegate
 
 - (void)didPostTweet:(Tweet *)tweet {
-    [self.tweets insertObject:tweet atIndex:0];
+    NSArray *newTweets = @[tweet];
+    self.tweets = [newTweets arrayByAddingObjectsFromArray:self.tweets];
     [self.tableView reloadData];
 }
 

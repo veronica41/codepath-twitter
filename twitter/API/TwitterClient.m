@@ -78,14 +78,15 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
     [self postPath:url parameters:nil success:success failure:failure];
 }
 
-- (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(int)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    if (count <= 0) count = 20;
+- (void)homeTimelineWithCount:(int)count sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    if (count <= 0) count = 20; // default to 20
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"count": @(count)}];
-    if (sinceId > 0) {
-        [params setObject:@(sinceId) forKey:@"since_id"];
+
+    if (sinceId) {
+        [params setObject:sinceId forKey:@"since_id"];
     }
     if (maxId > 0) {
-        [params setObject:@(maxId) forKey:@"max_id"];
+        [params setObject:maxId forKey:@"max_id"];
     }
     [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
 }
