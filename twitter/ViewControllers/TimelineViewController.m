@@ -7,7 +7,6 @@
 //
 
 #import "TimelineViewController.h"
-#import "TwitterClient.h"
 #import "User.h"
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
@@ -82,7 +81,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 - (void)loadTweetsWithCompletionHandler:(void(^)(void))completionHandler {
     __weak TimelineViewController *weakSelf = self;
 
-    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:nil maxId:nil success:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance] TimelineWithType:self.type maxId:nil success:^(AFHTTPRequestOperation *operation, id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.tweets = [[Tweet tweetsFromJSONArray:response] mutableCopy];
             [weakSelf.tableView reloadData];
@@ -101,7 +100,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     NSString * lastTweetID= ((Tweet *)[self.tweets lastObject]).tweetID;
     long long maxID = [lastTweetID longLongValue] - 1;
 
-    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:nil maxId:[@(maxID) stringValue] success:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance]  TimelineWithType:self.type maxId:[@(maxID) stringValue] success:^(AFHTTPRequestOperation *operation, id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSArray *newTweets = [Tweet tweetsFromJSONArray:response];
             NSInteger oldTweetsCount = weakSelf.tweets.count;
@@ -169,12 +168,6 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 - (void)onMenuButton:(id)sender {
 }
-
-/*
-- (void)signOutButtonHandler:(id)sender {
-    [User setCurrentUser:nil];
-}
-*/
 
 - (void)onNewButton:(id)sender {
     ComposeViewController * controller = [[ComposeViewController alloc] initWithTweetType:TweetTypeNew];

@@ -71,6 +71,11 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
           failure:failure];
 }
 
+- (void)getUserProfileWithScreenName:(NSString *)screenName success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *params = @{@"screen_name" : screenName};
+    [self getPath:@"1.1/users/show.json" parameters:params success:success failure:failure];
+}
+
 #pragma mark - Statuses API
 
 - (void)getStatusWithID:(NSString *)statusID success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
@@ -78,17 +83,24 @@ static NSString * const accessTokenKey = @"AccessTokenKey";
     [self postPath:url parameters:nil success:success failure:failure];
 }
 
-- (void)homeTimelineWithCount:(int)count sinceId:(NSString *)sinceId maxId:(NSString *)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    if (count <= 0) count = 20; // default to 20
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"count": @(count)}];
-
-    if (sinceId) {
-        [params setObject:sinceId forKey:@"since_id"];
-    }
+- (void)TimelineWithType:(TimelineType)type maxId:(NSString *)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *params = nil;
     if (maxId > 0) {
-        [params setObject:maxId forKey:@"max_id"];
+        params = @{@"max_id": maxId};
     }
-    [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
+    NSString *path;
+    if (type == TimeLineTypeHome) {
+        path = @"1.1/statuses/home_timeline.json";
+    } else if (type == TimelineTypeMentions) {
+        path = @"1.1/statuses/mentions_timeline.json";
+    }
+    
+    [self getPath:path parameters:params success:success failure:failure];
+}
+
+- (void)UserTimelineWithScreenName:(NSString *)screenName success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *params = @{@"screen_name" : screenName};
+    [self getPath:@"1.1/statuses/user_timeline.json" parameters:params success:success failure:failure];
 }
 
 - (void)postNewStatus:(NSString *)status

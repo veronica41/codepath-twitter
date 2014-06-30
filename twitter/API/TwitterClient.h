@@ -8,6 +8,11 @@
 
 #import "AFOAuth1Client.h"
 
+typedef enum {
+    TimeLineTypeHome = 0,
+    TimelineTypeMentions = 1
+} TimelineType;
+
 @interface TwitterClient : AFOAuth1Client
 
 + (TwitterClient *)instance;
@@ -17,12 +22,17 @@
                          failure:(void (^) (NSError *error))failure;
 - (void)currentUserWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id response))success
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
-- (void)homeTimelineWithCount:(int)count
-                      sinceId:(NSString *)sinceId
-                        maxId:(NSString *)maxId
+- (void)getUserProfileWithScreenName:(NSString *)screenName
                       success:(void (^)(AFHTTPRequestOperation *operation, id response))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)TimelineWithType:(TimelineType)type
+                   maxId:(NSString *)maxId
+                 success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)UserTimelineWithScreenName:(NSString *)screenName
+                           success:(void (^)(AFHTTPRequestOperation *operation, id response))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 - (void)getStatusWithID:(NSString *)statusID
                 success:(void (^)(AFHTTPRequestOperation *operation, id response))success
