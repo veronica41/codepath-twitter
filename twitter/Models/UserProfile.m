@@ -25,7 +25,7 @@
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
-+ (NSValueTransformer *)profileBackgroundImageUrlImageUrlJSONTransformer {
++ (NSValueTransformer *)profileBackgroundImageUrlJSONTransformer {
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 

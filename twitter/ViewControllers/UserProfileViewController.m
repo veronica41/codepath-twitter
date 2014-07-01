@@ -14,7 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 
 
-static NSString * kUserTimelineCellIdentifier = @"UserTimelineTableViewCell";
+static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 
 @interface UserProfileViewController ()
 
