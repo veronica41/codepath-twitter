@@ -104,8 +104,9 @@ static NSString * kDrawerHeaderCellIdentifier = @"drawerHeaderCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == DrawerMenuItemLogout) {
         [User setCurrentUser:nil];
+    } else {
+        [self.delegate drawerMenuItemIsSelected:(DrawerMenuItem)indexPath.row];
     }
-    [self.delegate drawerMenuItemIsSelected:(DrawerMenuItem)indexPath.row];
 }
 
 @end

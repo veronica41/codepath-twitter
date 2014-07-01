@@ -15,7 +15,7 @@
 
 @protocol TimelineTableViewCellDelegate <NSObject>
 
-- (void)didTapProfileImageForUser:(User *)user;
+- (void)didTapProfileImageForUser:(User *)user animated:(BOOL)aniamted;
 
 @end
 

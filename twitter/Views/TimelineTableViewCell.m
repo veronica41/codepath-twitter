@@ -109,7 +109,7 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
 }
 
 - (void)onProfileImage:(UIGestureRecognizer *)gestureRecognizer {
-    [self.delegate didTapProfileImageForUser:self.author];
+    [self.delegate didTapProfileImageForUser:self.author animated:YES];
 }
 
 @end

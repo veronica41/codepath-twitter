@@ -99,7 +99,10 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     navigationController.navigationBar.translucent = NO;
     _slidingViewController = [[SlidingViewController alloc] initWithMainViewController:navigationController];
-    _slidingViewController.drawerViewController = [[DrawerViewController alloc] init];
+    DrawerViewController *drawerViewController = [[DrawerViewController alloc] init];
+    drawerViewController.delegate = controller;
+    _slidingViewController.drawerViewController = drawerViewController;
+    
     return _slidingViewController;
 }
 

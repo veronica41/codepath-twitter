@@ -55,7 +55,6 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     self.prototypeCell = [_tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier];
 
     __weak TimelineViewController *weakSelf = self;
-
     // setup pull to refresh
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf loadTweetsWithCompletionHandler:^{
@@ -69,8 +68,13 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
             [weakSelf.tableView.infiniteScrollingView stopAnimating];
         }];
     }];
+    
+    [self reload];
+}
 
+- (void)reload {
     // load initial tweets
+    __weak TimelineViewController *weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self loadTweetsWithCompletionHandler:^{
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
@@ -161,10 +165,10 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 #pragma mark - TimelineTableViewCellDelegate
 
-- (void)didTapProfileImageForUser:(User *)user {
+- (void)didTapProfileImageForUser:(User *)user animated:(BOOL)animated {
     UserProfileViewController *profileController = [[UserProfileViewController alloc] init];
     profileController.user = user;
-    [self.navigationController pushViewController:profileController animated:YES];
+    [self.navigationController pushViewController:profileController animated:animated];
     [self.navigationController.view clipsToBounds];
 }
 
@@ -174,6 +178,35 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     NSArray *newTweets = @[tweet];
     self.tweets = [newTweets arrayByAddingObjectsFromArray:self.tweets];
     [self.tableView reloadData];
+}
+
+#pragma mark - DrawerViewControllerDelegate
+
+- (void)drawerMenuItemIsSelected:(DrawerMenuItem)menuItem {
+    switch (menuItem) {
+        case DrawerMenuItemProfile: {
+            [self didTapProfileImageForUser:[User currentUser] animated:NO];
+            break;
+        }
+        case DrawerMenuItemTimeline:
+            self.type = TimeLineTypeHome;
+            [self reload];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            break;
+        case DrawerMenuItemMetions:
+            self.type = TimelineTypeMentions;
+            [self reload];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            break;
+        case DrawerMenuItemHeader:
+        case DrawerMenuItemLogout:
+        default:
+            break;
+    }
+    if (self.navigationController.parentViewController && [self.navigationController.parentViewController isKindOfClass:SlidingViewController.class]) {
+        [(SlidingViewController *)self.navigationController.parentViewController dismissDrawerView];
+    }
+
 }
 
 #pragma mark - Button handlers
