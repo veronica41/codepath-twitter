@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ComposeViewController.h"
+#import "TimelineTableViewCell.h"
 #import "TweetViewController.h"
 #import "TwitterClient.h"
 
-@interface TimelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate>
+@interface TimelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TimelineTableViewCellDelegate>
 
 @property (nonatomic) TimelineType type;
 

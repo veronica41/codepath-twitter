@@ -7,9 +7,9 @@
 //
 
 #import "TimelineViewController.h"
+#import "UserProfileViewController.h"
 #import "User.h"
 #import "Tweet.h"
-#import "TimelineTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "SVPullToRefresh.h"
 #import "DrawerViewController.h"
@@ -133,6 +133,7 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:timelineCellIdentifier forIndexPath:indexPath];
     cell.tweet = self.tweets[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
@@ -150,9 +151,19 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    TweetViewController * tweetController = [[TweetViewController alloc] initWithTweet:cell.tweet];
+    TweetViewController * tweetController = [[TweetViewController alloc] init];
+    tweetController.tweet = cell.tweet;
     tweetController.delegate = cell;
     [self.navigationController pushViewController:tweetController animated:YES];
+    [self.navigationController.view clipsToBounds];
+}
+
+#pragma mark - TimelineTableViewCellDelegate
+
+- (void)didTapProfileImageForUser:(User *)user {
+    UserProfileViewController *profileController = [[UserProfileViewController alloc] init];
+    profileController.user = user;
+    [self.navigationController pushViewController:profileController animated:YES];
     [self.navigationController.view clipsToBounds];
 }
 
@@ -175,4 +186,5 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];
 }
+
 @end

@@ -35,10 +35,11 @@
 
 @implementation TweetViewController
 
-- (id)initWithTweet:(Tweet *)tweet {
-    self = [super init];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tweet = tweet;
+        // Custom initialization
     }
     return self;
 }

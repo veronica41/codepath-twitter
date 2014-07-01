@@ -24,6 +24,4 @@
 @property (nonatomic, weak) id<TweetViewControllerDelegate> delegate;
 @property (nonatomic, strong) Tweet *tweet;
 
-- (id)initWithTweet:(Tweet *)tweet;
-
 @end

@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "User.h"
 #import "RetweetImageView.h"
 #import "FavoriteImageView.h"
 #import "TweetViewController.h"
 
+@protocol TimelineTableViewCellDelegate <NSObject>
+
+- (void)didTapProfileImageForUser:(User *)user;
+
+@end
+
+
 @interface TimelineTableViewCell : UITableViewCell <RetweetImageViewDelegate, FavoriteImageViewDelegate, TweetViewControllerDelegate>
 
 @property (nonatomic, strong) Tweet *tweet;
+@property (nonatomic, weak) id<TimelineTableViewCellDelegate> delegate;
 
 @end

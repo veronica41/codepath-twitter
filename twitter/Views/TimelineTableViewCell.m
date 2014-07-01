@@ -28,17 +28,18 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
 @property (weak, nonatomic) IBOutlet RetweetImageView *retweetImageView;
 @property (weak, nonatomic) IBOutlet FavoriteImageView *favoriteImageView;
 
+@property (nonatomic, strong) User *author;
+
 @end
 
 
 @implementation TimelineTableViewCell
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    return self;
+- (void)awakeFromNib {
+    UITapGestureRecognizer *profileImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileImage:)];
+    profileImageTap.numberOfTapsRequired = 1;
+    self.profileImage.userInteractionEnabled = YES;
+    [self.profileImage addGestureRecognizer:profileImageTap];
 }
 
 - (void)setTweet:(Tweet *)tweet {
@@ -60,6 +61,7 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
         self.profileImageTopConstraint.constant = kProfileImageTopConstraintWithoutRetweet;
     }
 
+    self.author = originalTweet.user;
     [self.profileImage setImageWithURL:originalTweet.user.profileImageUrl];
     self.userNameLabel.text = originalTweet.user.name;
     self.userScreenNameLabel.text = originalTweet.user.screenNameString;
@@ -104,6 +106,10 @@ NSInteger const kProfileImageTopConstraintWithoutRetweet = 12;
 
 - (void)favoritedStateDidChangeForTweet:(Tweet *)tweet {
     [self.favoriteImageView setTweet:tweet];
+}
+
+- (void)onProfileImage:(UIGestureRecognizer *)gestureRecognizer {
+    [self.delegate didTapProfileImageForUser:self.author];
 }
 
 @end
