@@ -8,6 +8,7 @@
 
 #import "TweetViewController.h"
 #import "ComposeViewController.h"
+#import "UserProfileViewController.h"
 #import "TwitterClient.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDate+DateTools.h"
@@ -30,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userNameTopConstraint;
 
+@property (nonatomic, strong) User *author;
+
 @end
 
 
@@ -39,7 +42,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -76,8 +78,14 @@
         self.profileImageTopConstraint.constant = 12;
         self.userNameTopConstraint.constant = 18;
     }
+    self.author = originalTweet.user;
 
     [self.profileImageView setImageWithURL:originalTweet.user.profileImageUrl];
+    UITapGestureRecognizer *profileImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onProfileImage:)];
+    profileImageTap.numberOfTapsRequired = 1;
+    self.profileImageView.userInteractionEnabled = YES;
+    [self.profileImageView addGestureRecognizer:profileImageTap];
+
     self.userNameLabel.text = originalTweet.user.name;
     self.userScreenNameLabel.text = originalTweet.user.screenNameString;
     self.tweetLabel.text = originalTweet.text;
@@ -140,6 +148,13 @@
     controller.replyToTweet = self.tweet;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
     [self presentViewController:nvc animated:YES completion:nil];
+}
+
+- (void)onProfileImage:(UIGestureRecognizer *)gestureRecognizer {
+    UserProfileViewController *profileController = [[UserProfileViewController alloc] init];
+    profileController.user = self.author;
+    [self.navigationController pushViewController:profileController animated:YES];
+    [self.navigationController.view clipsToBounds];
 }
 
 @end

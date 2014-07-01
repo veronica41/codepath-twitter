@@ -26,8 +26,14 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 @property (weak, nonatomic) IBOutlet UITableView *tweetsTableView;
 
 @property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
+@property (nonatomic, strong) UIView *tableHeaderView;
+@property (nonatomic) CGRect headerFrame;
+
 @property (nonatomic, strong) UserProfile *userProfile;
 @property (nonatomic, strong) NSArray *tweets;
+
+@property (nonatomic) CGFloat firstX;
+@property (nonatomic) CGFloat firstY;
 
 @end
 
@@ -50,8 +56,13 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
     self.navigationItem.title = @"Profile";
 
     // setup table view
-    UIView * tableHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"ProfileHeaderView" owner:self options:nil] lastObject];
-    self.tweetsTableView.tableHeaderView = tableHeaderView;
+    self.tableHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"ProfileHeaderView" owner:self options:nil] lastObject];
+    self.headerFrame = self.tableHeaderView.frame;
+    UIPanGestureRecognizer *headerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanHeader:)];
+    self.tableHeaderView.userInteractionEnabled = YES;
+    [self.tableHeaderView  addGestureRecognizer:headerPan];
+    
+    self.tweetsTableView.tableHeaderView = self.tableHeaderView;
     self.tweetsTableView.dataSource = self;
     self.tweetsTableView.delegate = self;
 
@@ -153,7 +164,19 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
     }
 }
 
+- (IBAction)onPanHeader:(UIPanGestureRecognizer *)sender {
+    CGPoint translation = [sender translationInView:self.view];
+    if (translation.y > 0) {
+        CGRect newFrame = self.tableHeaderView.frame;
+        newFrame.size.height += translation.y;
+        self.tableHeaderView.frame = newFrame;
+        [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
+    }
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        self.tableHeaderView.frame = self.headerFrame;
+        [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
+    }
+    [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 
-
-
+}
 @end
