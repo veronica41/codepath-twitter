@@ -8,6 +8,7 @@
 
 #import "TimelineViewController.h"
 #import "UserProfileViewController.h"
+#import "SlidingViewController.h"
 #import "User.h"
 #import "Tweet.h"
 #import "MBProgressHUD.h"
@@ -178,6 +179,9 @@ static NSString * timelineCellIdentifier = @"TimelineTableViewCell";
 #pragma mark - Button handlers
 
 - (void)onMenuButton:(id)sender {
+    if (self.navigationController.parentViewController && [self.navigationController.parentViewController isKindOfClass:SlidingViewController.class]) {
+        [(SlidingViewController *)self.navigationController.parentViewController toggleDrawerView];
+    }
 }
 
 - (void)onNewButton:(id)sender {

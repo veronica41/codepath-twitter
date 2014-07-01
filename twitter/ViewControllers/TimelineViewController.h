@@ -12,6 +12,7 @@
 #import "TweetViewController.h"
 #import "TwitterClient.h"
 
+
 @interface TimelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TimelineTableViewCellDelegate>
 
 @property (nonatomic) TimelineType type;

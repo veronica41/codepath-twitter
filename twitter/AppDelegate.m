@@ -11,11 +11,13 @@
 #import "User.h"
 #import "SignInViewController.h"
 #import "TimelineViewController.h"
+#import "SlidingViewController.h"
+#import "DrawerViewController.h"
 #import "UIColor+Twitter.h"
 
 @implementation AppDelegate {
     SignInViewController * _signInViewController;
-    UINavigationController * _navigationController;
+    SlidingViewController *_slidingViewController;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -79,7 +81,7 @@
 
 - (void)updateRootController {
     if ([User currentUser]) {
-        self.window.rootViewController = self.navigationController;
+        self.window.rootViewController = self.slidingViewController;
     } else {
         self.window.rootViewController = self.signInViewController;
     }
@@ -92,11 +94,13 @@
     return _signInViewController;
 }
 
-- (UINavigationController *)navigationController {
+- (SlidingViewController *)slidingViewController {
     TimelineViewController * controller = [[TimelineViewController alloc] init];
-    _navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-    _navigationController.navigationBar.translucent = NO;
-    return _navigationController;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navigationController.navigationBar.translucent = NO;
+    _slidingViewController = [[SlidingViewController alloc] initWithMainViewController:navigationController];
+    _slidingViewController.drawerViewController = [[DrawerViewController alloc] init];
+    return _slidingViewController;
 }
 
 @end

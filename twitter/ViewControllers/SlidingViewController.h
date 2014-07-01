@@ -20,6 +20,10 @@
  */
 @property (nonatomic, strong) UIViewController *drawerViewController;
 
+
 - (id)initWithMainViewController:(UIViewController *)mainViewController;
+- (void)toggleDrawerView;
+- (void)showDrawerView;
+- (void)dismissDrawerView;
 
 @end

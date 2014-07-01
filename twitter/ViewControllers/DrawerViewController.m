@@ -37,7 +37,7 @@ static NSString * kDrawerHeaderCellIdentifier = @"drawerHeaderCellIdentifier";
     [super viewDidLoad];
 
     // setup table view
-    self.tableView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    self.tableView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

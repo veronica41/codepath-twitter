@@ -13,9 +13,12 @@
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIImage+Blur.h"
 
 static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
+
+static CGFloat kHeaderImageMaxHeight = 320;
 
 @interface UserProfileViewController ()
 
@@ -24,6 +27,7 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tweetsTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerImageHeightConstraint;
 
 @property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
 @property (nonatomic, strong) UIView *tableHeaderView;
@@ -31,9 +35,6 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 
 @property (nonatomic, strong) UserProfile *userProfile;
 @property (nonatomic, strong) NSArray *tweets;
-
-@property (nonatomic) CGFloat firstX;
-@property (nonatomic) CGFloat firstY;
 
 @end
 
@@ -62,7 +63,7 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
     self.tableHeaderView.userInteractionEnabled = YES;
     [self.tableHeaderView  addGestureRecognizer:headerPan];
     
-    self.tweetsTableView.tableHeaderView = self.tableHeaderView;
+    [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
     self.tweetsTableView.dataSource = self;
     self.tweetsTableView.delegate = self;
 
@@ -72,6 +73,10 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 
     UINib *userStatsCellNib = [UINib nibWithNibName:kUserStatsCellIdentifier bundle:nil];
     [self.tweetsTableView registerNib:userStatsCellNib forCellReuseIdentifier:kUserStatsCellIdentifier];
+
+    [self.view layoutSubviews];
+    self.tableHeaderView.frame = self.headerFrame;
+    [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
 
     __weak UserProfileViewController *weakSelf = self;
     [self getUserProfileWithCompletionHandler:^{
@@ -167,16 +172,18 @@ static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 - (IBAction)onPanHeader:(UIPanGestureRecognizer *)sender {
     CGPoint translation = [sender translationInView:self.view];
     if (translation.y > 0) {
-        CGRect newFrame = self.tableHeaderView.frame;
-        newFrame.size.height += translation.y;
-        self.tableHeaderView.frame = newFrame;
-        [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
+        CGRect frame = self.tableHeaderView.frame;
+        frame.size.height += translation.y;
+        if (frame.size.height <= kHeaderImageMaxHeight) {
+            self.tableHeaderView.frame = frame;
+            [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
+        }
+        //[UIImage BlurImage:self.backgroundImageView.image withRadius:translation.y/100];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
         self.tableHeaderView.frame = self.headerFrame;
         [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
     }
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
-
 }
 @end
