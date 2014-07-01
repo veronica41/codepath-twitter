@@ -80,9 +80,33 @@ static CGFloat kDrawerViewWidth = 285.0;
 
 
 - (void)handlePan:(UIPanGestureRecognizer *)sender {
+    if (!self.isDrawerShowing) {
+        [self insertDrawerView];
+        self.isDrawerShowing = YES;
+    }
+
     CGPoint translation = [sender translationInView:self.view];
+    CGFloat velocity = [sender velocityInView:self.view].x;
+    CGFloat left = self.mainViewController.view.left + translation.x;
+    if (left <= kDrawerViewWidth) {
+        self.mainViewController.view.left = left;
+    }
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        if (velocity >= 0) {
+            self.mainViewController.view.left = kDrawerViewWidth;
+        } else {
+            [self dismissDrawerView];
+        }
+    }
     [sender setTranslation:CGPointMake(0, 0) inView:self.view];
 
+}
+
+- (void)insertDrawerView {
+    CGRect frame = self.view.bounds;
+    frame.size.width = kDrawerViewWidth;
+    self.drawerViewController.view.frame = frame;
+    [self.view insertSubview:self.drawerViewController.view belowSubview:self.mainViewController.view];
 }
 
 - (void)toggleDrawerView {
@@ -96,17 +120,13 @@ static CGFloat kDrawerViewWidth = 285.0;
 - (void)showDrawerView {
     if (!self.drawerViewController) return;
     [self disableViewsForDragging];
-
-    CGRect frame = self.view.bounds;
-    frame.size.width = kDrawerViewWidth;
-    self.drawerViewController.view.frame = frame;
-    [self.view insertSubview:self.drawerViewController.view belowSubview:self.mainViewController.view];
+    [self insertDrawerView];
+    self.isDrawerShowing = YES;
     
     [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:1.0 initialSpringVelocity:0.0 options:0 animations:^{
         self.mainViewController.view.left = kDrawerViewWidth;
     } completion:^(BOOL completed) {
         [self enableViewsForDragging];
-        self.isDrawerShowing = YES;
     }];
 
 }
@@ -114,13 +134,13 @@ static CGFloat kDrawerViewWidth = 285.0;
 - (void)dismissDrawerView {
     if (!self.drawerViewController) return;
     [self disableViewsForDragging];
+    self.isDrawerShowing = NO;
  
     [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:1.0 initialSpringVelocity:0.0 options:0 animations:^{
         self.mainViewController.view.left = 0.0;
     } completion:^(BOOL completed) {
         [self.drawerViewController.view removeFromSuperview];
         [self enableViewsForDragging];
-        self.isDrawerShowing = NO;
     }];
 }
 
