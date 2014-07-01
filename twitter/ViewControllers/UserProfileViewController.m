@@ -9,12 +9,13 @@
 #import "UserProfileViewController.h"
 #import "UserProfile.h"
 #import "TwitterClient.h"
+#import "UserStatsCell.h"
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 
-
 static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
+static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 
 @interface UserProfileViewController ()
 
@@ -23,8 +24,6 @@ static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tweetsTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topImageHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileImageTopConstraint;
 
 @property (nonatomic, strong) TimelineTableViewCell *prototypeCell;
 @property (nonatomic, strong) UserProfile *userProfile;
@@ -47,11 +46,21 @@ static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 {
     [super viewDidLoad];
 
+    // setup the navigation bar
+    self.navigationItem.title = @"Profile";
+
+    // setup table view
+    UIView * tableHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"ProfileHeaderView" owner:self options:nil] lastObject];
+    self.tweetsTableView.tableHeaderView = tableHeaderView;
     self.tweetsTableView.dataSource = self;
     self.tweetsTableView.delegate = self;
+
     UINib *timelineCellNib = [UINib nibWithNibName:kUserTimelineCellIdentifier bundle:nil];
     [self.tweetsTableView registerNib:timelineCellNib forCellReuseIdentifier:kUserTimelineCellIdentifier];
     self.prototypeCell = [self.tweetsTableView dequeueReusableCellWithIdentifier:kUserTimelineCellIdentifier];
+
+    UINib *userStatsCellNib = [UINib nibWithNibName:kUserStatsCellIdentifier bundle:nil];
+    [self.tweetsTableView registerNib:userStatsCellNib forCellReuseIdentifier:kUserStatsCellIdentifier];
 
     __weak UserProfileViewController *weakSelf = self;
     [self getUserProfileWithCompletionHandler:^{
@@ -93,19 +102,28 @@ static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 
 #pragma mark - UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    }
     return self.tweets.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //if (indexPath.row == 0) {
-        
-    //} else {
-        TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUserTimelineCellIdentifier forIndexPath:indexPath];
-        cell.tweet = self.tweets[indexPath.row];
+    if (indexPath.section == 0) {
+        UserStatsCell *cell = [tableView dequeueReusableCellWithIdentifier:kUserStatsCellIdentifier];
+        [cell setUserProfile:self.userProfile];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    //}
+    } else {
+        TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUserTimelineCellIdentifier forIndexPath:indexPath];
+        cell.tweet = self.tweets[indexPath.row];
+        return cell;
+    }
     return nil;
 }
 
@@ -116,18 +134,23 @@ static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.prototypeCell.tweet = self.tweets[indexPath.row];
-    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height+1;
+    if (indexPath.section == 1) {
+        self.prototypeCell.tweet = self.tweets[indexPath.row];
+        CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        return size.height+1;
+    }
+    return 64;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    TweetViewController * tweetController = [[TweetViewController alloc] init];
-    tweetController.tweet = cell.tweet;
-    tweetController.delegate = cell;
-    [self.navigationController pushViewController:tweetController animated:YES];
-    [self.navigationController.view clipsToBounds];
+    if (indexPath.section == 1) {
+        TimelineTableViewCell * cell = (TimelineTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        TweetViewController * tweetController = [[TweetViewController alloc] init];
+        tweetController.tweet = cell.tweet;
+        tweetController.delegate = cell;
+        [self.navigationController pushViewController:tweetController animated:YES];
+        [self.navigationController.view clipsToBounds];
+    }
 }
 
 

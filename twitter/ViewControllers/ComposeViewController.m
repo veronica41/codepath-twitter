@@ -16,6 +16,7 @@ NSInteger const kTweetCharacterLimit = 140;
 
 @interface ComposeViewController ()
 
+@property (nonatomic) TweetType tweetType;
 @property (nonatomic, strong) UILabel *characterCountLabel;
 @property (nonatomic, strong) UIBarButtonItem * tweetButton;
 

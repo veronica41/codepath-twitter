@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="63" id="KGk-i7-Jjw" customClass="UserStatsCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTZ-0G-opB">
+                        <rect key="frame" x="15" y="11" width="40" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhX-PI-CIa">
+                        <rect key="frame" x="115" y="11" width="40" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixb-IC-Iic">
+                        <rect key="frame" x="221" y="11" width="40" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TWEETS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajG-Za-UxA">
+                        <rect key="frame" x="15" y="37" width="56" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deO-f0-eIR">
+                        <rect key="frame" x="106" y="0.0" width="1" height="62"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.88" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="YVr-qf-916"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJY-MM-Q7T">
+                        <rect key="frame" x="212" y="0.0" width="1" height="62"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.88" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="91e-7U-hvx"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHm-fe-Qtf">
+                        <rect key="frame" x="115" y="37" width="86" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHN-Ce-CDK">
+                        <rect key="frame" x="221" y="37" width="83" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="CHN-Ce-CDK" firstAttribute="top" secondItem="Ixb-IC-Iic" secondAttribute="bottom" constant="8" id="3It-CP-K4H"/>
+                    <constraint firstItem="XHm-fe-Qtf" firstAttribute="top" secondItem="UhX-PI-CIa" secondAttribute="bottom" constant="8" id="3M7-Yz-shu"/>
+                    <constraint firstItem="XHm-fe-Qtf" firstAttribute="leading" secondItem="UhX-PI-CIa" secondAttribute="leading" id="3Rb-yU-iLb"/>
+                    <constraint firstItem="Ixb-IC-Iic" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="57j-n8-QXK"/>
+                    <constraint firstItem="Ixb-IC-Iic" firstAttribute="leading" secondItem="PJY-MM-Q7T" secondAttribute="trailing" constant="8" id="74D-xW-Se5"/>
+                    <constraint firstItem="UhX-PI-CIa" firstAttribute="leading" secondItem="deO-f0-eIR" secondAttribute="trailing" constant="8" id="CSe-GK-cNo"/>
+                    <constraint firstItem="Ixb-IC-Iic" firstAttribute="leading" secondItem="CHN-Ce-CDK" secondAttribute="leading" id="IPm-Yk-kej"/>
+                    <constraint firstItem="NTZ-0G-opB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Pq2-Kc-CnT"/>
+                    <constraint firstItem="NTZ-0G-opB" firstAttribute="leading" secondItem="ajG-Za-UxA" secondAttribute="leading" id="Ty7-jg-xP3"/>
+                    <constraint firstItem="deO-f0-eIR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YKn-bE-1TC"/>
+                    <constraint firstItem="ajG-Za-UxA" firstAttribute="top" secondItem="NTZ-0G-opB" secondAttribute="bottom" constant="8" id="anr-pN-dJn"/>
+                    <constraint firstItem="NTZ-0G-opB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="drq-8F-usi"/>
+                    <constraint firstItem="UhX-PI-CIa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="duS-Dc-Wbz"/>
+                    <constraint firstItem="deO-f0-eIR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="106" id="e1a-4w-Mqs"/>
+                    <constraint firstItem="PJY-MM-Q7T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="hy8-iq-sql"/>
+                    <constraint firstAttribute="bottom" secondItem="PJY-MM-Q7T" secondAttribute="bottom" id="iw9-MB-ALc"/>
+                    <constraint firstItem="PJY-MM-Q7T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="212" id="mIV-nC-8bJ"/>
+                    <constraint firstAttribute="bottom" secondItem="deO-f0-eIR" secondAttribute="bottom" id="mJv-EY-kjG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="followersCountLabel" destination="UhX-PI-CIa" id="ROf-eM-wNH"/>
+                <outlet property="followingCountLabel" destination="Ixb-IC-Iic" id="F6q-Dp-fa2"/>
+                <outlet property="tweetsCountLabel" destination="NTZ-0G-opB" id="Dt6-Sv-U3X"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -42,6 +42,9 @@
 		96B855901956D44D00552A01 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B8558F1956D44D00552A01 /* Tweet.m */; };
 		96B855941956EBD800552A01 /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B855921956EBD800552A01 /* TimelineTableViewCell.m */; };
 		96B855951956EBD800552A01 /* TimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B855931956EBD800552A01 /* TimelineTableViewCell.xib */; };
+		96E6883B1962B0550013443B /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96E6883A1962B0550013443B /* ProfileHeaderView.xib */; };
+		96E6883F1962BFF50013443B /* UserStatsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E6883D1962BFF50013443B /* UserStatsCell.m */; };
+		96E688401962BFF50013443B /* UserStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96E6883E1962BFF50013443B /* UserStatsCell.xib */; };
 		B6EA23E9D0C44764A293ECFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3C60C19BF4478CA2E5A4BC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +114,10 @@
 		96B855911956EBD800552A01 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimelineTableViewCell.h; path = Views/TimelineTableViewCell.h; sourceTree = "<group>"; };
 		96B855921956EBD800552A01 /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimelineTableViewCell.m; path = Views/TimelineTableViewCell.m; sourceTree = "<group>"; };
 		96B855931956EBD800552A01 /* TimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TimelineTableViewCell.xib; path = Views/TimelineTableViewCell.xib; sourceTree = "<group>"; };
+		96E6883A1962B0550013443B /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+		96E6883C1962BFF50013443B /* UserStatsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserStatsCell.h; path = Views/UserStatsCell.h; sourceTree = "<group>"; };
+		96E6883D1962BFF50013443B /* UserStatsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserStatsCell.m; path = Views/UserStatsCell.m; sourceTree = "<group>"; };
+		96E6883E1962BFF50013443B /* UserStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserStatsCell.xib; path = Views/UserStatsCell.xib; sourceTree = "<group>"; };
 		BA7A92AB56A044D188D37707 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +257,10 @@
 				96378C0C1960E6A100C9D024 /* RetweetImageView.m */,
 				96378C0E1960E6B600C9D024 /* FavoriteImageView.h */,
 				96378C0F1960E6B600C9D024 /* FavoriteImageView.m */,
+				96E6883A1962B0550013443B /* ProfileHeaderView.xib */,
+				96E6883C1962BFF50013443B /* UserStatsCell.h */,
+				96E6883D1962BFF50013443B /* UserStatsCell.m */,
+				96E6883E1962BFF50013443B /* UserStatsCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -373,10 +384,12 @@
 				96B8554F1956665E00552A01 /* InfoPlist.strings in Resources */,
 				96B85581195693E600552A01 /* SignInViewController.xib in Resources */,
 				96378C4B196174AC00C9D024 /* DrawerViewController.xib in Resources */,
+				96E688401962BFF50013443B /* UserStatsCell.xib in Resources */,
 				96A874CA195965090093145A /* ComposeViewController.xib in Resources */,
 				96378C281961391B00C9D024 /* UserProfileViewController.xib in Resources */,
 				96B855571956665E00552A01 /* Images.xcassets in Resources */,
 				96B8558D1956C08100552A01 /* TimelineViewController.xib in Resources */,
+				96E6883B1962B0550013443B /* ProfileHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +455,7 @@
 				96378C0D1960E6A100C9D024 /* RetweetImageView.m in Sources */,
 				96378C4A196174AC00C9D024 /* DrawerViewController.m in Sources */,
 				96B855881956A6EF00552A01 /* User.m in Sources */,
+				96E6883F1962BFF50013443B /* UserStatsCell.m in Sources */,
 				96A874C9195965090093145A /* ComposeViewController.m in Sources */,
 				96B855511956665E00552A01 /* main.m in Sources */,
 				965D7B0A1957FD6A00CC00EC /* TweetViewController.m in Sources */,

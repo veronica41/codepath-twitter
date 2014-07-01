@@ -23,7 +23,6 @@ typedef enum {
 
 @interface ComposeViewController : UIViewController <UITextViewDelegate>
 
-@property (nonatomic) TweetType tweetType;
 @property (nonatomic, strong) Tweet *replyToTweet;
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 
