@@ -13,12 +13,12 @@
 #import "Tweet.h"
 #import "TimelineTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
-#import "UIImage+Blur.h"
+#import "UIImage+StackBlur.h"
 
 static NSString * kUserTimelineCellIdentifier = @"TimelineTableViewCell";
 static NSString * kUserStatsCellIdentifier = @"UserStatsCell";
 
-static CGFloat kHeaderImageMaxHeight = 320;
+static CGFloat kHeaderImageMaxHeight = 330;
 
 @interface UserProfileViewController ()
 
@@ -110,6 +110,8 @@ static CGFloat kHeaderImageMaxHeight = 320;
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.tweets = [[Tweet tweetsFromJSONArray:response] mutableCopy];
             [weakSelf.tweetsTableView reloadData];
+            self.tableHeaderView.frame = self.headerFrame;
+            [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"usertimeline request error: %@", error);
@@ -178,7 +180,8 @@ static CGFloat kHeaderImageMaxHeight = 320;
             self.tableHeaderView.frame = frame;
             [self.tweetsTableView setTableHeaderView:self.tableHeaderView];
         }
-        //[UIImage BlurImage:self.backgroundImageView.image withRadius:translation.y/100];
+        //CGFloat radius = frame.size.height - self.headerFrame.size.height;
+        //[self.backgroundImageView.image stackBlur:radius/5];
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
         self.tableHeaderView.frame = self.headerFrame;

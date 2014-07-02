@@ -45,8 +45,8 @@
 		96E6883B1962B0550013443B /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96E6883A1962B0550013443B /* ProfileHeaderView.xib */; };
 		96E6883F1962BFF50013443B /* UserStatsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E6883D1962BFF50013443B /* UserStatsCell.m */; };
 		96E688401962BFF50013443B /* UserStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96E6883E1962BFF50013443B /* UserStatsCell.xib */; };
-		96F0182E196334AF00A95485 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F0182D196334AF00A95485 /* UIImage+Blur.m */; };
 		96F01855196354C100A95485 /* UIView+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F01854196354C100A95485 /* UIView+Utilities.m */; };
+		96F0185B19637BA700A95485 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F0185A19637BA700A95485 /* UIImage+StackBlur.m */; };
 		B6EA23E9D0C44764A293ECFE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3C60C19BF4478CA2E5A4BC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -120,10 +120,10 @@
 		96E6883C1962BFF50013443B /* UserStatsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserStatsCell.h; path = Views/UserStatsCell.h; sourceTree = "<group>"; };
 		96E6883D1962BFF50013443B /* UserStatsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserStatsCell.m; path = Views/UserStatsCell.m; sourceTree = "<group>"; };
 		96E6883E1962BFF50013443B /* UserStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserStatsCell.xib; path = Views/UserStatsCell.xib; sourceTree = "<group>"; };
-		96F0182C196334AF00A95485 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Blur.h"; path = "Utilities/UIImage+Blur.h"; sourceTree = "<group>"; };
-		96F0182D196334AF00A95485 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Blur.m"; path = "Utilities/UIImage+Blur.m"; sourceTree = "<group>"; };
 		96F01853196354C100A95485 /* UIView+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Utilities.h"; path = "Utilities/UIView+Utilities.h"; sourceTree = "<group>"; };
 		96F01854196354C100A95485 /* UIView+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Utilities.m"; path = "Utilities/UIView+Utilities.m"; sourceTree = "<group>"; };
+		96F0185919637BA700A95485 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+StackBlur.h"; path = "Utilities/UIImage+StackBlur.h"; sourceTree = "<group>"; };
+		96F0185A19637BA700A95485 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+StackBlur.m"; path = "Utilities/UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		BA7A92AB56A044D188D37707 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -303,10 +303,10 @@
 			children = (
 				96B85582195696AC00552A01 /* UIColor+Twitter.h */,
 				96B85583195696AC00552A01 /* UIColor+Twitter.m */,
-				96F0182C196334AF00A95485 /* UIImage+Blur.h */,
-				96F0182D196334AF00A95485 /* UIImage+Blur.m */,
 				96F01853196354C100A95485 /* UIView+Utilities.h */,
 				96F01854196354C100A95485 /* UIView+Utilities.m */,
+				96F0185919637BA700A95485 /* UIImage+StackBlur.h */,
+				96F0185A19637BA700A95485 /* UIImage+StackBlur.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -456,10 +456,10 @@
 				96B85584195696AC00552A01 /* UIColor+Twitter.m in Sources */,
 				96B8557A1956766500552A01 /* TwitterClient.m in Sources */,
 				96B8558C1956C08100552A01 /* TimelineViewController.m in Sources */,
+				96F0185B19637BA700A95485 /* UIImage+StackBlur.m in Sources */,
 				96378C4619615CE900C9D024 /* SlidingViewController.m in Sources */,
 				96378C23196138B100C9D024 /* UserProfile.m in Sources */,
 				96B85580195693E600552A01 /* SignInViewController.m in Sources */,
-				96F0182E196334AF00A95485 /* UIImage+Blur.m in Sources */,
 				96378C101960E6B600C9D024 /* FavoriteImageView.m in Sources */,
 				96B855901956D44D00552A01 /* Tweet.m in Sources */,
 				96B855941956EBD800552A01 /* TimelineTableViewCell.m in Sources */,
