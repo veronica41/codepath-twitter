@@ -21,6 +21,7 @@ pod install
 ```
 
 Walkthrough of all user stories
-![Video Walkthrough](walkthrough.gif)
 
+![Video Walkthrough](walkthrough2.gif)
+![Video Walkthrough](walkthrough.gif)
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
